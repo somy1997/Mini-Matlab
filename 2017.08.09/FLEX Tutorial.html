@@ -1,0 +1,170 @@
+
+<!-- saved from url=(0049)http://alumni.cs.ucr.edu/~lgao/teaching/flex.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="description" content="flex tutorial">
+<title>FLEX Tutorial</title>
+<style type="text/css">
+<!--
+body {font-family:verdana,sans-serif;}
+td {font-size: 10pt;}
+a:active, a:link, a:visited {text-decoration:underline;}
+a:hover {color:red; text-decoration:none; font-weight:bold;}
+.centerImg {text-align:center; margin-top:0; margin-bottom:0; padding:0;}
+-->
+</style>
+</head>
+
+<body>
+
+<div align="center">
+  <table border="0" width="60%">
+    <tbody><tr>
+      <td bgcolor="#C0C0C0" valign="middle" align="center">
+        <font size="6" color="#CC0000"><b>FLEX Tutorial</b></font><br>
+        <font color="#000000" size="3">Lan Gao</font>
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+
+<div align="center">
+  <table border="0" width="80%">
+    <tbody><tr>
+      <td align="center">
+        [<a href="http://alumni.cs.ucr.edu/~lgao/index.html">Home</a>]&nbsp;&nbsp;&nbsp;
+        [<a href="http://alumni.cs.ucr.edu/~lgao/teaching/flex.html#scanner">What is a Scanner?</a>]&nbsp;&nbsp;&nbsp;
+        [<a href="http://alumni.cs.ucr.edu/~lgao/teaching/flex.html#FLEX">How to use FLEX?</a>]&nbsp;&nbsp;&nbsp;
+        [<a href="http://alumni.cs.ucr.edu/~lgao/teaching/flex.html#practice">Practice</a>]&nbsp;&nbsp;&nbsp;
+        [<a href="http://alumni.cs.ucr.edu/~lgao/teaching/flex.html#link">Resources</a>]
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+
+<hr>
+<a id="#scanner">
+  <font size="4" color="#008080"><b>What is a Scanner?</b></font>
+</a>
+
+<div align="center">
+  <table border="0" width="90%">
+    <tbody><tr>
+      <td align="justify">
+        The <i>scanner</i> performs <i>lexical analysis</i> of a certain 
+        program (in our case, the Simple program). It reads the source program 
+        as a sequence of characters and recognizes "larger" textual 
+        units called <i>tokens</i>. For example, if the source programs 
+        contains the characters
+        <p align="center">VAR ics142: INTEGER; // variable declaration</p>
+        the scanner would produce the tokens
+        <p align="center">VAR&nbsp; ID(ics142)&nbsp; COLON&nbsp; ID(INTEGER)&nbsp; SEMICOLON</p>
+        to be processed in later phases of the compiler. Note that the scanner 
+        discards white space and comments between the tokens, i.e. they are 
+        "filtered" and not passed on to later phases. Examples of 
+        nontokens are tabs, line feeds, carriage returns, etc.
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+
+<br><hr>
+<a id="#FLEX">
+  <font size="4" color="#008080"><b>How to use FLEX?</b></font>
+</a>
+
+<div align="center">
+  <table border="0" width="90%">
+    <tbody><tr>
+      <td align="justify">
+        FLEX (Fast LEXical analyzer generator) is a tool for generating 
+        scanners. In stead of writing a scanner from scratch, you only need to 
+        identify the <i>vocabulary</i> of a certain language (e.g. Simple), 
+        write a specification of patterns using regular expressions (e.g. DIGIT
+        [0-9]), and FLEX will construct a scanner for you. FLEX is generally 
+        used in the manner depicted here:
+        <p class="centerImg"><img border="0" src="./FLEX Tutorial_files/flex.jpg"></p>
+        First, FLEX reads a specification of a scanner either from an input 
+        file *.lex, or from standard input, and it generates as output a C 
+        source file <i>lex.yy.c</i>. Then, <i>lex.yy.c</i> is compiled and 
+        linked with the "-lfl" library to produce an executable 
+        <i>a.out</i>. Finally, <i>a.out</i> analyzes its input stream and 
+        transforms it into a sequence of tokens.<br><br>
+        <img border="0" src="./FLEX Tutorial_files/dot.gif">
+        <b>*.lex</b> is in the form of pairs of regular expressions and C code.
+	(<a href="http://alumni.cs.ucr.edu/~lgao/teaching/flex/sample1.lex">sample1.lex</a>, 
+         <a href="http://alumni.cs.ucr.edu/~lgao/teaching/flex/sample2.lex">sample2.lex</a>)<br>
+        <img border="0" src="./FLEX Tutorial_files/dot.gif">
+        <b>lex.yy.c</b>  defines a routine <i>yylex()</i> that uses the
+        specification to recognize tokens.<br>
+        <img border="0" src="./FLEX Tutorial_files/dot.gif">
+        <b>a.out</b> is actually the scanner!
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+
+<br><hr>
+<a id="#practice">
+  <b><font size="4" color="#008080">Practice</font></b>
+</a>
+
+<div align="center">
+  <table border="0" width="90%">
+    <tbody><tr>
+      <td>
+        <ul>
+          <li>Get familiar with FLEX
+            <ol>
+              <li>Try sample*.lex
+              </li><li>Command Sequence:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;flex sample*.lex<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;gcc lex.yy.c -lfl<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;./a.out
+            </li></ol>
+          <br>
+          </li><li>Understand the input file
+            <ol>
+              <li>Format:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;definitions<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;%%<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;rules<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;%%<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;user code<br>
+              </li><li>The <i>definitions</i> section: "name definition"<br>
+                The <i>rules</i> section: "pattern action"<br>
+                The <i>user code</i> section: "yylex() routine"
+              </li><li>Try to answer questions listed in the sample files
+            </li></ol>
+          <br>
+          </li><li>Write a scanner for 32-bit hexadecimal numbers.
+            <a href="http://alumni.cs.ucr.edu/~lgao/teaching/flex/hex.lex">Here</a> is the answer...
+        </li></ul>
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+
+<hr>
+<a id="#link">
+  <b><font size="4" color="#008080">Resources</font></b>
+</a>
+
+<div align="center">
+  <table border="0" width="90%">
+    <tbody><tr>
+      <td>
+        <ol>
+          <li><a href="http://flex.sourceforge.net/" target="_blank">FLEX homepage</a>
+          </li><li><a href="http://www.gnu.org/software/flex/manual" target="_blank">FLEX manual</a>
+          </li><li>man flex
+        </li></ol>
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+
+
+
+
+</body></html>

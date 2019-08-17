@@ -1,0 +1,67 @@
+==============================================================================
+Generated Quads for the program
+  0. :t000	=	5
+  1. :doctor	=	t000
+  2. :t001	=	6
+  3. :nurse	=	t001
+  4. :t002	=	2
+  5. :t003	=	nurse + t002
+  6. :i	=	t003
+  7. :t004	=	t003
+  8. :param	i
+  9. :t005	=	call printi, 1
+ 10. :param	_0
+ 11. :t006	=	call prints, 1
+ 12. :t007	=	5
+ 13. :nurse	=	t007
+ 14. :t008	=	t007
+ 15. :i	=	nurse
+ 16. :t009	=	nurse
+ 17. :param	i
+ 18. :t010	=	call printi, 1
+ 19. :param	_1
+ 20. :t011	=	call prints, 1
+ 21. :t012	=	0
+ 22. :return	t012
+==============================================================================
+Symbol table Maintained For the Given Program
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Symbol Table : Global
+Offset = 16
+Start Quad Index = 0
+End Quad Index =  0
+Name	Value	var_type	size	Offset	Type
+printi	null	func		0	-1	ptr-to-St( Global )Int
+readi	null	func		0	-1	ptr-to-St( Global )Int
+prints	null	func		0	-1	ptr-to-St( Global )Int
+doctor	5	local		4	0	Int
+t000	5	temp		4	4	Int
+nurse	6	local		4	8	Int
+t001	6	temp		4	12	Int
+main	null	func		0	-1	ptr-to-St( main )Int
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=============================================================================
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Symbol Table : main
+Offset = -48
+Start Quad Index = 4
+End Quad Index =  22
+Name	Value	var_type	size	Offset	Type
+retVal	null	return		4	0	Int
+i	null	local		4	-4	Int
+t002	2	temp		4	-8	Int
+t003	null	temp		4	-12	Int
+t004	null	temp		4	-16	Int
+t005	null	temp		4	-20	Int
+t006	null	temp		4	-24	Int
+t007	5	temp		4	-28	Int
+t008	null	temp		4	-32	Int
+t009	null	temp		4	-36	Int
+t010	null	temp		4	-40	Int
+t011	null	temp		4	-44	Int
+t012	0	temp		4	-48	Int
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

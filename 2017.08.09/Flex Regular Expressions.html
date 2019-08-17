@@ -1,0 +1,155 @@
+
+<!-- saved from url=(0069)http://people.cs.aau.dk/~marius/sw/flex/Flex-Regular-Expressions.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+</head><body><table border="1" width="100%"><tbody><tr><td><table border="1" bgcolor="#ffffff" cellpadding="10" cellspacing="0" width="100%" color="#ffffff"><tbody><tr><td><font face="arial,sans-serif" color="black" size="-1">This is <b><font color="#0039b6">G</font> <font color="#c41200">o</font> <font color="#f3c518">o</font> <font color="#0039b6">g</font> <font color="#30a72f">l</font> <font color="#c41200">e</font></b>'s <a href="http://www.google.com/help/features.html#cached"><font color="blue">cache</font></a> of <a href="http://www.lrde.epita.fr/people/akim/compil/gnuprog2/Flex-Regular-Expressions.html"><font color="blue">http://www.lrde.epita.fr/people/akim/compil/gnuprog2/Flex-Regular-Expressions.html</font></a>.<br>
+<b><font color="#0039b6">G</font> <font color="#c41200">o</font> <font color="#f3c518">o</font> <font color="#0039b6">g</font> <font color="#30a72f">l</font> <font color="#c41200">e</font></b>'s cache is the snapshot that we took of the page as we crawled the web.<br>
+The page may have changed since that time.  Click here for the <a href="http://www.lrde.epita.fr/people/akim/compil/gnuprog2/Flex-Regular-Expressions.html"><font color="blue">current page</font></a> without highlighting.<br>To link to or bookmark this page, use the following url: <code>http://www.google.com/search?q=cache:f9l_ms_fK2kC:www.lrde.epita.fr/people/akim/compil/gnuprog2/Flex-Regular-Expressions.html+&amp;hl=en&amp;ie=UTF-8</code></font><br><br><center><font size="-2"><i>Google is not affiliated with the authors of this page nor responsible for its content.</i></font></center></td></tr></tbody></table></td></tr></tbody></table>
+<hr>
+<title>Flex Regular Expressions</title><link rel="next" href="http://people.cs.aau.dk/~marius/sw/flex/Flex-Actions.html">
+<link rel="previous" href="http://people.cs.aau.dk/~marius/sw/flex/Flex-Directives.html">
+<link rel="up" href="http://people.cs.aau.dk/~marius/sw/flex/Using-Flex.html">
+
+
+<p>
+Noeud:<a name="Flex-Regular-Expressions.html">Flex Regular Expressions</a>,
+Noeud «Next»:<a rel="next" href="http://people.cs.aau.dk/~marius/sw/flex/Flex-Actions.html">Flex Actions</a>,
+Noeud «Previous»:<a rel="previous" href="http://people.cs.aau.dk/~marius/sw/flex/Flex-Directives.html">Flex Directives</a>,
+Noeud «Up»:<a rel="up" href="http://people.cs.aau.dk/~marius/sw/flex/Using-Flex.html">Using Flex</a>
+</p><hr><br>
+
+<h4>Flex Regular Expressions</h4>
+
+<p>The characters and literals may be described by:
+
+</p><dl>
+<dt><code><var>x</var></code>
+</dt><dd>the character <var>x</var>.
+
+<br></dd><dt><code>.</code>
+</dt><dd>any character except newline.
+
+<br></dd><dt><code>[xyz]</code>
+</dt><dd>Any characters amongst <code>x</code>, <code>y</code> or <code>z</code>.  You may use a
+dash for character intervals: <code>[a-z]</code> denotes any letter from
+<code>a</code> through <code>z</code>.  You may use a leading hat to negate the
+class: <code>[0-9]</code> stands for any character which is not a decimal
+digit, including new-line.
+
+<br></dd><dt><code>\<var>x</var></code>
+</dt><dd>if <var>x</var> is an <code>a</code>, <code>b</code>, <code>f</code>, <code>n</code>, <code>r</code>,
+<code>t</code>, or <code>v</code>, then the ANSI-C interpretation of
+<code>\<var>x</var></code>.  Otherwise, a literal <code><var>x</var></code> (used to escape
+operators such as <code>*</code>).
+
+<br></dd><dt><code>\0</code>
+</dt><dd>a NUL character.
+
+<br></dd><dt><code>\<var>num</var></code>
+</dt><dd>the character with octal value <var>num</var>.
+
+<br></dd><dt><code>\x<var>num</var></code>
+</dt><dd>the character with hexadecimal value <var>num</var>.
+
+<br></dd><dt><code>"<var>string</var>"</code>
+</dt><dd>Match the literal <var>string</var>.  For instance <code>"/*"</code> denotes the
+character <code>/</code> and then the character <code>*</code>, as opposed to
+<code>/*</code> denoting any number of slashes.
+
+<br></dd><dt><code>&lt;&lt;EOF&gt;&gt;</code>
+</dt><dd>Match the end-of-file. 
+</dd></dl>
+
+<br><p>
+</p><p>The basic operators to make more complex regular expressions are, with
+<var>r</var> and <var>s</var> being two regular expressions:
+
+</p><dl>
+<dt><code>(<var>r</var>)</code>
+</dt><dd>Match an <var>r</var>; parentheses are used to override precedence.
+
+<br></dd><dt><code><var>r</var><var>s</var></code>
+</dt><dd>Match the regular expression <var>r</var> followed by the regular expression
+<var>s</var>.  This is called <dfn>concatenation</dfn>.
+
+<br></dd><dt><code><var>r</var>|<var>s</var></code>
+</dt><dd>Match either an <var>r</var> or an <var>s</var>.  This is called
+<dfn>alternation</dfn>.
+
+<br></dd><dt><code>{<var>abbreviation</var>}</code>
+</dt><dd>Match the expansion of the <var>abbreviation</var> definition.  Instead of
+writing
+
+<pre>%%
+[a-zA-Z_][a-zA-Z0-9_]*   return IDENTIFIER;
+%%
+</pre>
+
+<p>you may write
+
+</p><pre>id  [a-zA-Z_][a-zA-Z0-9_]*
+%%
+{id}   return IDENTIFIER;
+%%
+</pre>
+</dd></dl>
+
+<br><p>
+</p><p>The <dfn>quantifiers</dfn> allow to specify the number of times a pattern
+must be repeated:
+
+</p><dl>
+<dt><code><var>r</var>*</code>
+</dt><dd>zero or more <var>r</var>'s.
+
+<br></dd><dt><code><var>r</var>+</code>
+</dt><dd>one or more <var>r</var>'s.
+
+<br></dd><dt><code><var>r</var>?</code>
+</dt><dd>zero or one <var>r</var>'s.
+
+<br></dd><dt><code><var>r</var>{[<var>num</var>]}</code>
+</dt><dd><var>num</var> times <var>r</var>
+
+<br></dd><dt><code><var>r</var>{<var>min</var>,[<var>max</var>]}</code>
+</dt><dd>anywhere from <var>min</var> to <var>max</var> (defaulting to no bound) <var>r</var>'s. 
+</dd></dl>
+
+<p>For instance <code>-?([0-9]+|[0-9]*\.[0-9]+([eE][-+]?[0-9]+)?)</code> matches
+C integer and floating point numbers.
+
+<br></p><p>
+</p><p>One may also depend upon the context:
+
+</p><dl>
+<dt><code><var>r</var>/<var>s</var></code>
+</dt><dd>Match an <var>r</var> but only if it is followed by an <var>s</var>.  This type of
+pattern is called <dfn>trailing context</dfn>.  The text matched by <var>s</var>
+is included when determining whether this rule is the "longest match",
+but is then returned to the input before the action is executed.  So the
+action only sees the text matched by <var>r</var>.  Using trailing contexts
+can have a negative impact on the scanner, in particular the input
+buffer can no longer grow upon demand.  In addition, it can produce
+correct but surprising errors.  Fortunately it is seldom needed, and
+only to process pathologic languages such as Fortran.  For instance to
+recognize its loop keyword, <code>do</code>, one needs:
+
+<pre>DO/[A-Z0-9]*=[A-Z0-9]*,
+</pre>
+
+<p>to distinguish <code>DO1I=1,5</code>, a for loop where <code>I</code> runs from 1 to
+5, from <code>DO1I=1.5</code>, a definition/assignment of the floating
+variable <code>DO1I</code> to 1.5.  Voir <a href="http://people.cs.aau.dk/~marius/sw/flex/Fortran-and-Satellites.html">Fortran and Satellites</a>, for more on
+Fortran loops and traps.
+
+<br></p></dd><dt><code>^<var>r</var></code>
+</dt><dd>Match an <var>r</var> at the beginning of a line.
+
+<br></dd><dt><code><var>r</var>$</code>
+</dt><dd>Match an <var>r</var> at the end of a line.  This is rigorously equivalent to
+<code><var>r</var>/\n</code>, and therefore suffers the same problems, see
+<a href="http://people.cs.aau.dk/~marius/sw/flex/Simple-Uses-of-Flex.html">Simple Uses of Flex</a>. 
+</dd></dl>
+
+
+
+</body></html>

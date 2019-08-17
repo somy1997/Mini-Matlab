@@ -1,0 +1,112 @@
+Grammar
+
+    0 $accept: input $end
+
+    1 exp: INTEGER_LITERAL
+    2    | exp PLUS exp
+    3    | exp MULT exp
+
+    4 input: %empty
+    5      | exp
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+INTEGER_LITERAL (258) 1
+PLUS (259) 2
+MULT (260) 3
+
+
+Nonterminals, with rules where they appear
+
+$accept (6)
+    on left: 0
+exp (7)
+    on left: 1 2 3, on right: 2 3 5
+input (8)
+    on left: 4 5, on right: 0
+
+
+State 0
+
+    0 $accept: . input $end
+
+    INTEGER_LITERAL  shift, and go to state 1
+
+    $default  reduce using rule 4 (input)
+
+    exp    go to state 2
+    input  go to state 3
+
+
+State 1
+
+    1 exp: INTEGER_LITERAL .
+
+    $default  reduce using rule 1 (exp)
+
+
+State 2
+
+    2 exp: exp . PLUS exp
+    3    | exp . MULT exp
+    5 input: exp .
+
+    PLUS  shift, and go to state 4
+    MULT  shift, and go to state 5
+
+    $default  reduce using rule 5 (input)
+
+
+State 3
+
+    0 $accept: input . $end
+
+    $end  shift, and go to state 6
+
+
+State 4
+
+    2 exp: exp PLUS . exp
+
+    INTEGER_LITERAL  shift, and go to state 1
+
+    exp  go to state 7
+
+
+State 5
+
+    3 exp: exp MULT . exp
+
+    INTEGER_LITERAL  shift, and go to state 1
+
+    exp  go to state 8
+
+
+State 6
+
+    0 $accept: input $end .
+
+    $default  accept
+
+
+State 7
+
+    2 exp: exp . PLUS exp
+    2    | exp PLUS exp .
+    3    | exp . MULT exp
+
+    MULT  shift, and go to state 5
+
+    $default  reduce using rule 2 (exp)
+
+
+State 8
+
+    2 exp: exp . PLUS exp
+    3    | exp . MULT exp
+    3    | exp MULT exp .
+
+    $default  reduce using rule 3 (exp)

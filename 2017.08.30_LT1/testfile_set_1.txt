@@ -1,0 +1,45 @@
+while
+char
+0
+1280
+!=
+_0i
+0_I
+-90
++.2
+-90.8
+7.
++7.6
+.0e+0+0
+.0-1.
+""
+"hello world~ char"
+"break :)"
+*pointer
+float*
+<<
+++
+_ 
+"// this is a comment"
+0010
++0
+_0.e0
+#include
+for(_=__;;);
+0E-0
+_-_-_
+for(i=3;i<2;k++)
+for(i=1;j<=0;i++)
+for(i=0,j=10;k<22;i++,k--)
+for(i=0,j=10;k<22;i++,++k)
+_++
+_1[_1]
+while(a<9009)
+[6,4,2;0,3,5]
+a=b_0+1;
+switch(_)
+if(a<1&&b<2)
+i_=1,_2=2,i=0
+a=b_0+1
+++_++
+i=2.5

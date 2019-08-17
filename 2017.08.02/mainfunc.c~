@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include "myl.h"
+
+int main()
+{/*
+	//printStr()
+	char str[256]; int flag;
+	printf("Enter a string : ");
+	scanf("%[^\n]s",str);
+	flag = printStr(str);
+	printf("%d characters printed.\n",flag);
+	//readInt()
+	int flag,n;
+	//printf("Enter an integer : ");
+	flag = readInt(&n);
+	if(flag)
+		printf("Invalid integer.\n");
+	else
+		printf("Integer entered : %d\n",n);*/
+	//printInt()
+	printf("Enter an integer : ");
+	scanf("%d",&n);
+	printf("Entered Integer : ");
+	flag = printInt(n);
+	printf("%d characters printed.\n",flag);/*
+	//readFlt()
+	float f;
+	printf("Enter a float : ");
+	flag = readFlt(&f);
+	getchar();
+	if(flag)
+		printf("Invalid float.\n");
+	else
+		printf("Float entered : %f\n",f);
+	//printFlt()
+	printf("Enter a float : ");
+	scanf("%f",&f);
+	getchar();
+	printf("Entered float : ");
+	flag = printFlt(f);
+	printf("%d characters printed.\n",flag);*/
+	return 0;
+}

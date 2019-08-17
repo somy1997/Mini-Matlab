@@ -1,0 +1,124 @@
+========================================================================================================================================================================================
+Generated Quads for the program
+========================================================================================================================================================================================
+
+0.   :	start main
+1.   :	t000 = 10
+2.   :	a    = t000
+3.   :	t001 = 11
+4.   :	b    = t001
+5.   :	t002 = 12
+6.   :	f    = t002
+7.   :	t003 = 2
+8.   :	t004 = 3
+9.   :	t005 = 1.000000
+10.  :	t006 = 2.000000
+11.  :	t007 = 1.200000
+12.  :	t008 = 3.400000
+13.  :	t009 = 4.300000
+14.  :	t010 = 2.300000
+15.  :	mat[0] = 2
+16.  :	mat[4] = 3
+17.  :	mat[8] = 1.000000
+18.  :	mat[16] = 2.000000
+19.  :	mat[24] = 1.200000
+20.  :	mat[32] = 3.400000
+21.  :	mat[40] = 4.300000
+22.  :	mat[48] = 2.300000
+23.  :	t011 = a * b
+24.  :	c    = t011
+25.  :	t012 = a / b
+26.  :	d    = t012
+27.  :	t013 = a % b
+28.  :	e    = t013
+29.  :	t014 = a + b
+30.  :	f    = t014
+31.  :	t015 = a - b
+32.  :	g    = t015
+33.  :	t016 = a
+34.  :	a    = a + 1
+35.  :	t017 = a
+36.  :	a    = a - 1
+37.  :	b    = b + 1
+38.  :	t018 = b
+39.  :	b    = b - 1
+40.  :	t019 = b
+41.  :	t020 = 1
+42.  :	t021 = 2
+43.  :	t022 = mat[4]
+44.  :	t023 = t022 * t020
+45.  :	t023 = t023 + t021
+46.  :	t023 = t023 * 8
+47.  :	t023 = t023 + 8
+48.  :	t024 = mat[t023]
+49.  :	z    = t024
+50.  :	t025 = a + b
+51.  :	t026 = t025 * c
+52.  :	t027 = 8
+53.  :	t028 = d * t027
+54.  :	t029 = t026 - t028
+55.  :	b    = t029
+56.  :	return 
+
+========================================================================================================================================================================================
+Symbol table Maintained For the Given Program
+========================================================================================================================================================================================
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Symbol Table : Global
+
+Name                	Type                	Nature              	Initial value       	size                	Offset              	Nested Table        	
+
+main                	Function            	func                	null                	0                   	0                   	ptr-to-St( main )
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Symbol Table : main
+
+Name                	Type                	Nature              	Initial value       	size                	Offset              	Nested Table        	
+
+retVal              	Void                	return              	null                	0                   	0                   	null
+t000                	Int                 	Temporary           	10                  	4                   	0                   	null
+a                   	Int                 	local               	10                  	4                   	4                   	null
+t001                	Int                 	Temporary           	11                  	4                   	8                   	null
+b                   	Int                 	local               	11                  	4                   	12                  	null
+c                   	Int                 	local               	null                	4                   	16                  	null
+d                   	Int                 	local               	null                	4                   	20                  	null
+e                   	Int                 	local               	null                	4                   	24                  	null
+t002                	Int                 	Temporary           	12                  	4                   	28                  	null
+f                   	Int                 	local               	12                  	4                   	32                  	null
+g                   	Int                 	local               	null                	4                   	36                  	null
+h                   	Int                 	local               	null                	4                   	40                  	null
+i                   	Pointer(Int)        	local               	null                	4                   	44                  	null
+t003                	Int                 	Temporary           	2                   	4                   	48                  	null
+t004                	Int                 	Temporary           	3                   	4                   	52                  	null
+t005                	Double              	Temporary           	1.000000            	8                   	56                  	null
+t006                	Double              	Temporary           	2.000000            	8                   	64                  	null
+t007                	Double              	Temporary           	1.200000            	8                   	72                  	null
+t008                	Double              	Temporary           	3.400000            	8                   	80                  	null
+t009                	Double              	Temporary           	4.300000            	8                   	88                  	null
+t010                	Double              	Temporary           	2.300000            	8                   	96                  	null
+mat                 	Matrix(2,3,Double)  	local               	{ 1.000000, 2.000000, 1.200000; 3.400000, 4.300000, 2.300000}48+8                	104                 	null
+t011                	Int                 	Temporary           	null                	4                   	160                 	null
+t012                	Int                 	Temporary           	null                	4                   	164                 	null
+t013                	Int                 	Temporary           	null                	4                   	168                 	null
+t014                	Int                 	Temporary           	null                	4                   	172                 	null
+t015                	Int                 	Temporary           	null                	4                   	176                 	null
+t016                	Int                 	Temporary           	null                	4                   	180                 	null
+t017                	Int                 	Temporary           	null                	4                   	184                 	null
+t018                	Int                 	Temporary           	null                	4                   	188                 	null
+t019                	Int                 	Temporary           	null                	4                   	192                 	null
+t020                	Int                 	Temporary           	1                   	4                   	196                 	null
+t021                	Int                 	Temporary           	2                   	4                   	200                 	null
+t022                	Int                 	Temporary           	null                	4                   	204                 	null
+t023                	Int                 	Temporary           	null                	4                   	208                 	null
+t024                	Double              	Temporary           	null                	8                   	212                 	null
+z                   	Double              	local               	0.000000            	8                   	220                 	null
+t025                	Int                 	Temporary           	null                	4                   	228                 	null
+t026                	Int                 	Temporary           	null                	4                   	232                 	null
+t027                	Int                 	Temporary           	8                   	4                   	236                 	null
+t028                	Int                 	Temporary           	null                	4                   	240                 	null
+t029                	Int                 	Temporary           	null                	4                   	244                 	null
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

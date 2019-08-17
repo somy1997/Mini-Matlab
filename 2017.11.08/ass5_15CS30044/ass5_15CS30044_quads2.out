@@ -1,0 +1,397 @@
+==============================================================================
+Generated Quads for the program
+  0. :top_1	=	min
+  1. :t000	=	1
+  2. :t001	=	mid + t000
+  3. :top_2	=	t001
+  4. :top	=	min
+  5. :t002	=	100
+  6. :t003	=	1
+  7. :t004	=	mid + t003
+  8. :if  top_1 ==t004	goto 55
+  9. :goto 10
+ 10. :t005	=	1
+ 11. :t006	=	max + t005
+ 12. :if  top_2 ==t006	goto 55
+ 13. :goto 15
+ 14. :goto 55
+ 15. :t008	=	0
+ 16. :t010	=	top_1 * 4
+ 17. :t009	=	t008 + t010
+ 18. :t011	=	a[t009]
+ 19. :t012	=	0
+ 20. :t014	=	top_2 * 4
+ 21. :t013	=	t012 + t014
+ 22. :t015	=	a[t013]
+ 23. :if  t011 >=t015	goto 26
+ 24. :goto 40
+ 25. :goto 54
+ 26. :t016	=	0
+ 27. :t017	=	top
+ 28. :top	=	top + 1
+ 29. :t019	=	t017 * 4
+ 30. :t018	=	t016 + t019
+ 31. :t020	=	0
+ 32. :t021	=	top_2
+ 33. :top_2	=	top_2 + 1
+ 34. :t023	=	t021 * 4
+ 35. :t022	=	t020 + t023
+ 36. :t024	=	a[t022]
+ 37. :c[t018]	=	t024
+ 38. :t025	=	t024
+ 39. :goto 6
+ 40. :t026	=	0
+ 41. :t027	=	top
+ 42. :top	=	top + 1
+ 43. :t029	=	t027 * 4
+ 44. :t028	=	t026 + t029
+ 45. :t030	=	0
+ 46. :t031	=	top_1
+ 47. :top_1	=	top_1 + 1
+ 48. :t033	=	t031 * 4
+ 49. :t032	=	t030 + t033
+ 50. :t034	=	a[t032]
+ 51. :c[t028]	=	t034
+ 52. :t035	=	t034
+ 53. :goto 6
+ 54. :goto 6
+ 55. :t036	=	1
+ 56. :t037	=	mid + t036
+ 57. :if  top_1 ==t037	goto 60
+ 58. :goto 81
+ 59. :goto 102
+ 60. :i	=	top_2
+ 61. :t038	=	top_2
+ 62. :if  i <=max	goto 68
+ 63. :goto 102
+ 64. :goto 80
+ 65. :t039	=	i
+ 66. :i	=	i + 1
+ 67. :goto 62
+ 68. :t040	=	0
+ 69. :t041	=	top
+ 70. :top	=	top + 1
+ 71. :t043	=	t041 * 4
+ 72. :t042	=	t040 + t043
+ 73. :t044	=	0
+ 74. :t046	=	i * 4
+ 75. :t045	=	t044 + t046
+ 76. :t047	=	a[t045]
+ 77. :c[t042]	=	t047
+ 78. :t048	=	t047
+ 79. :goto 65
+ 80. :goto 102
+ 81. :i	=	top_1
+ 82. :t049	=	top_1
+ 83. :if  i <=mid	goto 89
+ 84. :goto 102
+ 85. :goto 101
+ 86. :t050	=	i
+ 87. :i	=	i + 1
+ 88. :goto 83
+ 89. :t051	=	0
+ 90. :t052	=	top
+ 91. :top	=	top + 1
+ 92. :t054	=	t052 * 4
+ 93. :t053	=	t051 + t054
+ 94. :t055	=	0
+ 95. :t057	=	i * 4
+ 96. :t056	=	t055 + t057
+ 97. :t058	=	a[t056]
+ 98. :c[t053]	=	t058
+ 99. :t059	=	t058
+100. :goto 86
+101. :goto 102
+102. :i	=	min
+103. :t060	=	min
+104. :if  i <=max	goto 110
+105. :goto 120
+106. :goto 120
+107. :t061	=	i
+108. :i	=	i + 1
+109. :goto 104
+110. :t062	=	0
+111. :t064	=	i * 4
+112. :t063	=	t062 + t064
+113. :t065	=	0
+114. :t067	=	i * 4
+115. :t066	=	t065 + t067
+116. :t068	=	c[t066]
+117. :a[t063]	=	t068
+118. :t069	=	t068
+119. :goto 107
+120. :t070	=	0
+121. :return	t070
+122. :if  min <max	goto 125
+123. :goto 149
+124. :goto 149
+125. :t071	=	min + max
+126. :t072	=	2
+127. :t073	=	t071 / t072
+128. :mid	=	t073
+129. :t074	=	t073
+130. :t075	=	0
+131. :param	a
+132. :param	min
+133. :param	mid
+134. :t076	=	call merge_sort, 3
+135. :t077	=	0
+136. :t078	=	1
+137. :t079	=	mid + t078
+138. :param	a
+139. :param	t079
+140. :param	max
+141. :t080	=	call merge_sort, 3
+142. :t081	=	0
+143. :param	a
+144. :param	min
+145. :param	mid
+146. :param	max
+147. :t082	=	call merge, 4
+148. :goto 149
+149. :t083	=	0
+150. :return	t083
+151. :t084	=	100
+152. :t085	=	1
+153. :err	=	t085
+154. :param	_0
+155. :t086	=	call prints, 1
+156. :param	_1
+157. :t087	=	call prints, 1
+158. :t088	=	& err
+159. :param	t088
+160. :t089	=	call readi, 1
+161. :n	=	t089
+162. :t090	=	t089
+163. :param	_2
+164. :t091	=	call prints, 1
+165. :t092	=	0
+166. :i	=	t092
+167. :t093	=	t092
+168. :if  i <n	goto 174
+169. :goto 183
+170. :goto 183
+171. :t094	=	i
+172. :i	=	i + 1
+173. :goto 168
+174. :t095	=	0
+175. :t097	=	i * 4
+176. :t096	=	t095 + t097
+177. :t098	=	& err
+178. :param	t098
+179. :t099	=	call readi, 1
+180. :a[t096]	=	t099
+181. :t100	=	t099
+182. :goto 171
+183. :t101	=	0
+184. :t102	=	0
+185. :t103	=	1
+186. :t104	=	n - t103
+187. :param	a
+188. :param	t102
+189. :param	t104
+190. :t105	=	call merge_sort, 3
+191. :param	_3
+192. :t106	=	call prints, 1
+193. :t107	=	0
+194. :i	=	t107
+195. :t108	=	t107
+196. :if  i <n	goto 202
+197. :goto 211
+198. :goto 211
+199. :t109	=	i
+200. :i	=	i + 1
+201. :goto 196
+202. :t110	=	0
+203. :t112	=	i * 4
+204. :t111	=	t110 + t112
+205. :t113	=	a[t111]
+206. :param	t113
+207. :t114	=	call printi, 1
+208. :param	_4
+209. :t115	=	call prints, 1
+210. :goto 199
+211. :t116	=	0
+212. :return	t116
+==============================================================================
+Symbol table Maintained For the Given Program
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Symbol Table : Global
+Offset = 0
+Start Quad Index = 0
+End Quad Index =  0
+Name	Value	var_type	size	Offset	Type
+printi	null	func		0	-1	ptr-to-St( Global )Int
+readi	null	func		0	-1	ptr-to-St( Global )Int
+prints	null	func		0	-1	ptr-to-St( Global )Int
+merge	null	func		0	-1	ptr-to-St( merge )Int
+merge_sort	null	func		0	-1	ptr-to-St( merge_sort )Int
+main	null	func		0	-1	ptr-to-St( main )Int
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=============================================================================
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Symbol Table : merge
+Offset = -717
+Start Quad Index = 0
+End Quad Index =  121
+Name	Value	var_type	size	Offset	Type
+retVal	null	return		4	0	Int
+a	null	param		8	-20	array(-1,Int)
+min	null	param		4	-12	Int
+mid	null	param		4	-8	Int
+max	null	param		4	-4	Int
+top_1	0	local		4	-24	Int
+top_2	0	local		4	-28	Int
+t000	1	temp		4	-32	Int
+t001	null	temp		4	-36	Int
+top	0	local		4	-40	Int
+i	null	local		4	-44	Int
+c	null	local		400	-444	array(100,Int)
+t002	100	temp		4	-448	Int
+t003	1	temp		4	-452	Int
+t004	null	temp		4	-456	Int
+t005	1	temp		4	-460	Int
+t006	null	temp		4	-464	Int
+t007	null	temp		1	-465	Bool
+t008	0	temp		4	-469	Int
+t009	null	temp		4	-473	Int
+t010	null	temp		4	-477	Int
+t011	null	temp		4	-481	Int
+t012	0	temp		4	-485	Int
+t013	null	temp		4	-489	Int
+t014	null	temp		4	-493	Int
+t015	null	temp		4	-497	Int
+t016	0	temp		4	-501	Int
+t017	null	temp		4	-505	Int
+t018	null	temp		4	-509	Int
+t019	null	temp		4	-513	Int
+t020	0	temp		4	-517	Int
+t021	null	temp		4	-521	Int
+t022	null	temp		4	-525	Int
+t023	null	temp		4	-529	Int
+t024	null	temp		4	-533	Int
+t025	null	temp		4	-537	Int
+t026	0	temp		4	-541	Int
+t027	null	temp		4	-545	Int
+t028	null	temp		4	-549	Int
+t029	null	temp		4	-553	Int
+t030	0	temp		4	-557	Int
+t031	null	temp		4	-561	Int
+t032	null	temp		4	-565	Int
+t033	null	temp		4	-569	Int
+t034	null	temp		4	-573	Int
+t035	null	temp		4	-577	Int
+t036	1	temp		4	-581	Int
+t037	null	temp		4	-585	Int
+t038	null	temp		4	-589	Int
+t039	null	temp		4	-593	Int
+t040	0	temp		4	-597	Int
+t041	null	temp		4	-601	Int
+t042	null	temp		4	-605	Int
+t043	null	temp		4	-609	Int
+t044	0	temp		4	-613	Int
+t045	null	temp		4	-617	Int
+t046	null	temp		4	-621	Int
+t047	null	temp		4	-625	Int
+t048	null	temp		4	-629	Int
+t049	null	temp		4	-633	Int
+t050	null	temp		4	-637	Int
+t051	0	temp		4	-641	Int
+t052	null	temp		4	-645	Int
+t053	null	temp		4	-649	Int
+t054	null	temp		4	-653	Int
+t055	0	temp		4	-657	Int
+t056	null	temp		4	-661	Int
+t057	null	temp		4	-665	Int
+t058	null	temp		4	-669	Int
+t059	null	temp		4	-673	Int
+t060	null	temp		4	-677	Int
+t061	null	temp		4	-681	Int
+t062	0	temp		4	-685	Int
+t063	null	temp		4	-689	Int
+t064	null	temp		4	-693	Int
+t065	0	temp		4	-697	Int
+t066	null	temp		4	-701	Int
+t067	null	temp		4	-705	Int
+t068	null	temp		4	-709	Int
+t069	null	temp		4	-713	Int
+t070	0	temp		4	-717	Int
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Symbol Table : merge_sort
+Offset = -72
+Start Quad Index = 122
+End Quad Index =  150
+Name	Value	var_type	size	Offset	Type
+retVal	null	return		4	0	Int
+a	null	param		8	-16	array(-1,Int)
+min	null	param		4	-8	Int
+max	null	param		4	-4	Int
+mid	null	local		4	-20	Int
+t071	null	temp		4	-24	Int
+t072	2	temp		4	-28	Int
+t073	null	temp		4	-32	Int
+t074	null	temp		4	-36	Int
+t075	0	temp		4	-40	Int
+t076	null	temp		4	-44	Int
+t077	0	temp		4	-48	Int
+t078	1	temp		4	-52	Int
+t079	null	temp		4	-56	Int
+t080	null	temp		4	-60	Int
+t081	0	temp		4	-64	Int
+t082	null	temp		4	-68	Int
+t083	0	temp		4	-72	Int
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Symbol Table : main
+Offset = -552
+Start Quad Index = 151
+End Quad Index =  212
+Name	Value	var_type	size	Offset	Type
+retVal	null	return		4	0	Int
+a	null	local		400	-400	array(100,Int)
+t084	100	temp		4	-404	Int
+i	null	local		4	-408	Int
+n	null	local		4	-412	Int
+err	1	local		4	-416	Int
+t085	1	temp		4	-420	Int
+t086	null	temp		4	-424	Int
+t087	null	temp		4	-428	Int
+t088	null	temp		8	-436	ptr(Int)
+t089	null	temp		4	-440	Int
+t090	null	temp		4	-444	Int
+t091	null	temp		4	-448	Int
+t092	0	temp		4	-452	Int
+t093	null	temp		4	-456	Int
+t094	null	temp		4	-460	Int
+t095	0	temp		4	-464	Int
+t096	null	temp		4	-468	Int
+t097	null	temp		4	-472	Int
+t098	null	temp		8	-480	ptr(Int)
+t099	null	temp		4	-484	Int
+t100	null	temp		4	-488	Int
+t101	0	temp		4	-492	Int
+t102	0	temp		4	-496	Int
+t103	1	temp		4	-500	Int
+t104	null	temp		4	-504	Int
+t105	null	temp		4	-508	Int
+t106	null	temp		4	-512	Int
+t107	0	temp		4	-516	Int
+t108	null	temp		4	-520	Int
+t109	null	temp		4	-524	Int
+t110	0	temp		4	-528	Int
+t111	null	temp		4	-532	Int
+t112	null	temp		4	-536	Int
+t113	null	temp		4	-540	Int
+t114	null	temp		4	-544	Int
+t115	null	temp		4	-548	Int
+t116	0	temp		4	-552	Int
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

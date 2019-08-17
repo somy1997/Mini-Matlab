@@ -1,0 +1,22 @@
+Following things need to be taken care of :
+
+Assembly codes need to be in x86_64 //same in seniors also
+Instead of arrays in the symboltable now there would be matrix
+The functions designed from the assignment 2 need to be used
+handle scopes
+handle global variables in static region
+there is some problem in handling doubles directly especially initialisation
+need to handle doubles
+change the assignment 2 functions
+modify for double
+the main has to be put in target_translator
+
+
+modifications :
+
+First adding all the functions in assignment 2 in the global symbol table
+stringslabel: strings being added in the symbol table as well as this vector
+mark labels function in glob_st
+global variables function in glob_st
+Above means see the handling of global declarations
+translator's main function

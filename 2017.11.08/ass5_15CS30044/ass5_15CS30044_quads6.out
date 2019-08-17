@@ -1,0 +1,122 @@
+==============================================================================
+Generated Quads for the program
+  0. :t000	=	78
+  1. :*a	=	t000
+  2. :t001	=	t000
+  3. :t002	=	0
+  4. :return	t002
+  5. :t003	=	5
+  6. :i	=	t003
+  7. :t004	=	& i
+  8. :p	=	t004
+  9. :t005	=	t004
+ 10. :t006	=	6
+ 11. :*p	=	t006
+ 12. :t007	=	t006
+ 13. :param	i
+ 14. :t008	=	call printi, 1
+ 15. :param	_0
+ 16. :t009	=	call prints, 1
+ 17. :q	=	p
+ 18. :t010	=	9
+ 19. :*q	=	t010
+ 20. :t011	=	t010
+ 21. :param	i
+ 22. :t012	=	call printi, 1
+ 23. :param	_1
+ 24. :t013	=	call prints, 1
+ 25. :t014	=	'A'
+ 26. :c	=	t014
+ 27. :t015	=	& c
+ 28. :d	=	t015
+ 29. :t016	=	t015
+ 30. :t017	=	'k'
+ 31. :*d	=	t017
+ 32. :t018	=	t017
+ 33. :t019	=	'k'
+ 34. :if  c ==t019	goto 37
+ 35. :goto 40
+ 36. :goto 43
+ 37. :param	_2
+ 38. :t020	=	call prints, 1
+ 39. :goto 43
+ 40. :param	_3
+ 41. :t021	=	call prints, 1
+ 42. :goto 43
+ 43. :param	p
+ 44. :t022	=	call gen, 1
+ 45. :param	i
+ 46. :t023	=	call printi, 1
+ 47. :param	_4
+ 48. :t024	=	call prints, 1
+ 49. :t025	=	0
+ 50. :return	t025
+==============================================================================
+Symbol table Maintained For the Given Program
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Symbol Table : Global
+Offset = 0
+Start Quad Index = 0
+End Quad Index =  0
+Name	Value	var_type	size	Offset	Type
+printi	null	func		0	-1	ptr-to-St( Global )Int
+readi	null	func		0	-1	ptr-to-St( Global )Int
+prints	null	func		0	-1	ptr-to-St( Global )Int
+gen	null	func		0	-1	ptr-to-St( gen )Int
+main	null	func		0	-1	ptr-to-St( main )Int
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=============================================================================
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Symbol Table : gen
+Offset = -20
+Start Quad Index = 0
+End Quad Index =  4
+Name	Value	var_type	size	Offset	Type
+retVal	null	return		4	0	Int
+a	null	param		8	-8	ptr(Int)
+t000	78	temp		4	-12	Int
+t001	null	temp		4	-16	Int
+t002	0	temp		4	-20	Int
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Symbol Table : main
+Offset = -125
+Start Quad Index = 5
+End Quad Index =  50
+Name	Value	var_type	size	Offset	Type
+retVal	null	return		4	0	Int
+p	null	local		8	-8	ptr(Int)
+i	5	local		4	-12	Int
+t003	5	temp		4	-16	Int
+t004	null	temp		8	-24	ptr(Int)
+t005	null	temp		8	-32	ptr(Int)
+t006	6	temp		4	-36	Int
+t007	null	temp		4	-40	Int
+t008	null	temp		4	-44	Int
+t009	null	temp		4	-48	Int
+q	null	local		8	-56	ptr(Int)
+t010	9	temp		4	-60	Int
+t011	null	temp		4	-64	Int
+t012	null	temp		4	-68	Int
+t013	null	temp		4	-72	Int
+c	A	local		1	-73	Char
+t014	A	temp		1	-74	Char
+d	null	local		8	-82	ptr(Char)
+t015	null	temp		8	-90	ptr(Char)
+t016	null	temp		8	-98	ptr(Char)
+t017	k	temp		1	-99	Char
+t018	null	temp		1	-100	Char
+t019	k	temp		1	-101	Char
+t020	null	temp		4	-105	Int
+t021	null	temp		4	-109	Int
+t022	null	temp		4	-113	Int
+t023	null	temp		4	-117	Int
+t024	null	temp		4	-121	Int
+t025	0	temp		4	-125	Int
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

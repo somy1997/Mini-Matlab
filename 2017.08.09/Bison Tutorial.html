@@ -1,0 +1,185 @@
+
+<!-- saved from url=(0050)http://alumni.cs.ucr.edu/~lgao/teaching/bison.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="description" content="bison tutorial">
+<title>Bison Tutorial</title>
+<style type="text/css">
+<!--
+body {font-family:verdana,sans-serif;}
+td {font-size: 10pt;}
+a:active,a:link, a:visited {text-decoration:underline}
+a:hover {color:red; text-decoration:none; font-weight:bold;}
+.centerImg {text-align:center; margin-top:0; margin-bottom:0; padding:0;}
+-->
+</style>
+</head>
+
+<body>
+
+<div align="center">
+  <table border="0" width="60%">
+    <tbody><tr>
+      <td bgcolor="#C0C0C0" valign="middle" align="center">
+        <font size="6" color="#CC0000"><b>Bison Tutorial</b></font><br>
+        <font color="#000000" size="3">Lan Gao</font>
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+
+<div align="center">
+  <table border="0" width="80%">
+    <tbody><tr>
+      <td align="center">
+        [<a href="http://alumni.cs.ucr.edu/~lgao/index.html">Home</a>]&nbsp;&nbsp;&nbsp;
+        [<a href="http://alumni.cs.ucr.edu/~lgao/teaching/bison.html#parser">What is a parser?</a>]&nbsp;&nbsp;&nbsp;
+        [<a href="http://alumni.cs.ucr.edu/~lgao/teaching/bison.html#bison">How to use Bison?</a>]&nbsp;&nbsp;&nbsp;
+        [<a href="http://alumni.cs.ucr.edu/~lgao/teaching/bison.html#lab">Practice</a>]&nbsp;&nbsp;&nbsp;
+        [<a href="http://alumni.cs.ucr.edu/~lgao/teaching/bison.html#link">Resources</a>]
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+
+<hr>
+<a id="#parser">
+  <font size="4" color="#008080"><b>What is a Parser?</b></font>
+</a>
+
+<div align="center">
+  <table border="0" width="90%">
+    <tbody><tr>
+      <td align="justify">
+        <i>Parsing</i> is the process of matching grammar symbols to elements 
+        in the input data, according to the rules of the grammar. The 
+        <i>parser</i> obtains a sequence of tokens from the lexical analyzer, 
+        and recognizes it's structure in the form of a parse tree. The <i>parse
+        tree</i> expresses the hierarchical structure of the input data, and is
+        a mapping of grammar symbols to data elements. Tree nodes represent 
+        symbols of the grammar (non-terminals or terminals), and tree edges 
+        represent derivation steps.<br><br>
+        There are two basic parsing approaches: top-down and bottom-up. 
+        Intuitively, a <i>top-down</i> parser begins with the start symbol. By 
+        looking at the input string, it traces a leftmost derivation of the 
+        string. By the time it is done, a parse tree is generated top-down. 
+        While a <i>bottom-up</i> parser generates the parse tree bottom-up. 
+        Given the string to be parsed and the set of productions, it traces a 
+        rightmost derivation in reverse by starting with the input string and 
+        working backwards to the start symbol.
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+
+<br><hr>
+<a id="#bison">
+  <font size="4" color="#008080"><b>How to use Bison?</b></font>
+</a>
+
+<div align="center">
+  <table border="0" width="90%">
+    <tbody><tr>
+      <td align="justify">
+        <i>Bison</i> is a general-purpose <i>parser generator</i> that converts
+        a grammar description (Bison Grammar Files) for an LALR(1) context-free
+        grammar into a C program to parse that grammar. The Bison parser is a 
+        bottom-up parser. It tries, by shifts and reductions, to reduce the 
+        entire input down to a single grouping whose symbol is the grammar's 
+        start-symbol.
+        <p class="centerImg"><img border="0" src="./Bison Tutorial_files/bison.jpg"></p>
+        Steps to use Bison:<br><br>
+        <img border="0" src="./Bison Tutorial_files/dot.gif">
+        Write a lexical analyzer to process input and pass tokens to the parser
+        (<a href="http://alumni.cs.ucr.edu/~lgao/teaching/calc/calc.lex">calc.lex</a>).<br>
+        <img border="0" src="./Bison Tutorial_files/dot.gif">
+        Write the grammar specification for bison 
+        (<a href="http://alumni.cs.ucr.edu/~lgao/teaching/calc/calc.y">calc.y</a>), including grammar rules, yyparse() 
+        and yyerror().<br>
+        <img border="0" src="./Bison Tutorial_files/dot.gif">
+        Run Bison on the grammar to produce the parser. 
+        (<a href="http://alumni.cs.ucr.edu/~lgao/teaching/calc/Makefile">Makefile</a>)<br>
+        <img border="0" src="./Bison Tutorial_files/dot.gif">
+        Compile the code output by Bison, as well as any other source files.<br>
+        <img border="0" src="./Bison Tutorial_files/dot.gif">
+        Link the object files to produce the finished product.
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+
+<br><hr>
+<a id="#lab">
+  <font size="4" color="#008080"><b>Practice</b></font>
+</a>
+
+<div align="center">
+  <table border="0" width="90%">
+    <tbody><tr>
+      <td>
+        <ul>
+          <li>Get familiar with Bison: Write a desk calculator which performs 
+            '+' and '*' on unsigned integers
+            <ol>
+              <li>Create a Directory: "mkdir calc"
+              </li><li>Save the five files (<a href="http://alumni.cs.ucr.edu/~lgao/teaching/calc/calc.lex">calc.lex</a>,
+                <a href="http://alumni.cs.ucr.edu/~lgao/teaching/calc/calc.y">calc.y</a>, 
+                <a href="http://alumni.cs.ucr.edu/~lgao/teaching/calc/Makefile">Makefile</a>, 
+                <a href="http://alumni.cs.ucr.edu/~lgao/teaching/calc/main.cc">main.cc</a>, and 
+                <a href="http://alumni.cs.ucr.edu/~lgao/teaching/calc/heading.h">heading.h</a>) to directory 
+                "calc"
+              </li><li>Command Sequence: "make"; "./calc"
+              </li><li>Use input programs (or stdin) which contain expressions with 
+                integer constants and operators + and *, then press Ctrl-D to 
+                see the result
+            </li></ol>
+          <br>
+          </li><li>Understand the input file
+            <ol>
+              <li>Format:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;%{<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;C Declarations<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;%}<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Bison Declarations<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;%%<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Grammar Rules<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;%%<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Additional C Code
+              </li><li>Useful Bison definitions:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;%token, %union, %type, %left, %right,
+                %nonassoc, ...<br>
+                Format of the grammar rules section:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<i><b>result: components ...<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;</b></i><br>
+                Important data structure and functions:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;yylval, YYSTYPE, yyerror(), yyparse()
+            </li></ol>
+        </li></ul>
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+
+<hr>
+<a id="#link">
+  <b><font size="4" color="#008080">Resources</font></b>
+</a>
+
+<div align="center">
+  <table border="0" width="90%">
+    <tbody><tr>
+      <td>
+        <ol>
+          <li><a href="http://www.gnu.org/software/bison/" target="_blank">Bison homepage</a>
+          </li><li><a href="http://www.gnu.org/software/bison/manual" target="_blank">Bison manual</a>
+          </li><li>man bison
+        </li></ol>
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+
+
+
+
+</body></html>

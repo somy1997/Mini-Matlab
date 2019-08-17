@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<!-- saved from url=(0106)http://web.archive.org/web/20130428074333/http://blog.mozilla.org:80/respindola/2011/05/12/cfi-directives/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./CFI directives _ Rafael Espindola&#39;s Blog_files/ga.js"></script><script type="text/javascript" src="./CFI directives _ Rafael Espindola&#39;s Blog_files/analytics.js" charset="utf-8"></script>
+
+<script type="text/javascript">archive_analytics.values.service='wb';archive_analytics.values.server_name='wwwb-app13.us.archive.org';archive_analytics.values.server_ms=327;</script><script type="text/javascript" src="./CFI directives _ Rafael Espindola&#39;s Blog_files/wbhack.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+__wbhack.init('http://web.archive.org/web');
+</script>
+<link rel="stylesheet" type="text/css" href="./CFI directives _ Rafael Espindola&#39;s Blog_files/banner-styles.css">
+<link rel="stylesheet" type="text/css" href="./CFI directives _ Rafael Espindola&#39;s Blog_files/iconochive.css">
+
+<!-- End Wayback Rewrite JS Include -->
+
+<title>CFI directives | Rafael Espindola's Blog</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="stylesheet" type="text/css" media="all" href="./CFI directives _ Rafael Espindola&#39;s Blog_files/style.css">
+<link rel="pingback" href="http://blog.mozilla.org/respindola/xmlrpc.php">
+<link rel="alternate" type="application/rss+xml" title="Rafael Espindola&#39;s Blog » Feed" href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/feed/">
+<link rel="alternate" type="application/rss+xml" title="Rafael Espindola&#39;s Blog » Comments Feed" href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Rafael Espindola&#39;s Blog » CFI directives Comments Feed" href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/05/12/cfi-directives/feed/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://blog.mozilla.org/respindola/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://blog.mozilla.org/respindola/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Firefox builds with clang" href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/05/06/firefox-builds-with-clang/">
+<link rel="next" title="Misc updates" href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/05/31/misc-updates/">
+<meta name="generator" content="WordPress 3.5.1">
+<link rel="canonical" href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/05/12/cfi-directives/">
+<link rel="shortlink" href="http://blog.mozilla.org/respindola/?p=277">
+            <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-36116321-4']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'http://web.archive.org/web/20130428074333/https://ssl/' : 'http://web.archive.org/web/20130428074333/http://www/') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+            </script></head>
+
+<body class="single single-post postid-277 single-format-standard"><div id="wm-ipp" lang="en" style="display: block; direction: ltr;" class="">
+<div style="position:fixed;left:0;top:0;width:100%!important">
+<div id="wm-ipp-inside">
+  <table style="width:100%;">
+    <tbody>
+      <tr>
+	<td id="wm-logo">
+	  <a href="http://web.archive.org/web/" title="Wayback Machine home page"><img src="./CFI directives _ Rafael Espindola&#39;s Blog_files/wayback-toolbar-logo.png" alt="Wayback Machine" width="110" height="39" border="0"></a>
+	</td>
+	<td class="c">
+	  <table style="margin:0 auto;">
+	    <tbody>
+	      <tr>
+		<td class="u" colspan="2">
+		  <form target="_top" method="get" action="http://web.archive.org/web/submit" name="wmtb" id="wmtb"><input type="text" name="url" id="wmtbURL" value="http://blog.mozilla.org:80/respindola/2011/05/12/cfi-directives/" style="width:400px;" onfocus="this.focus();this.select();" autocomplete="off"><input type="hidden" name="type" value="replay"><input type="hidden" name="date" value="20130428074333"><input type="submit" value="Go"></form>
+		</td>
+		<td class="n" rowspan="2">
+		  <table>
+		    <tbody>
+		      <!-- NEXT/PREV MONTH NAV AND MONTH INDICATOR -->
+		      <tr class="m">
+			<td class="b" nowrap="nowrap"><a href="http://web.archive.org/web/20130111101034/http://blog.mozilla.org:80/respindola/2011/05/12/cfi-directives" title="11 Jan 2013"><strong>Jan</strong></a></td>
+			<td class="c" id="displayMonthEl" title="You are here: 07:43:33 Apr 28, 2013">Apr</td>
+			<td class="f" nowrap="nowrap"><a href="http://web.archive.org/web/20130730224424/http://blog.mozilla.org:80/respindola/2011/05/12/cfi-directives" title="30 Jul 2013"><strong>Jul</strong></a></td>
+		      </tr>
+		      <!-- NEXT/PREV CAPTURE NAV AND DAY OF MONTH INDICATOR -->
+		      <tr class="d">
+			<td class="b" nowrap="nowrap"><a href="http://web.archive.org/web/20130111101034/http://blog.mozilla.org:80/respindola/2011/05/12/cfi-directives" title="10:10:34 Jan 11, 2013"><img src="./CFI directives _ Rafael Espindola&#39;s Blog_files/wm_tb_prv_on.png" alt="Previous capture" width="14" height="16" border="0"></a></td>
+			<td class="c" id="displayDayEl" style="width:34px;font-size:24px;" title="You are here: 07:43:33 Apr 28, 2013">28</td>
+			<td class="f" nowrap="nowrap"><a href="http://web.archive.org/web/20130527184605/http://blog.mozilla.org/respindola/2011/05/12/cfi-directives/" title="18:46:05 May 27, 2013"><img src="./CFI directives _ Rafael Espindola&#39;s Blog_files/wm_tb_nxt_on.png" alt="Next capture" width="14" height="16" border="0"></a></td>
+		      </tr>
+		      <!-- NEXT/PREV YEAR NAV AND YEAR INDICATOR -->
+		      <tr class="y">
+			<td class="b" nowrap="nowrap">2012</td>
+			<td class="c" id="displayYearEl" title="You are here: 07:43:33 Apr 28, 2013">2013</td>
+			<td class="f" nowrap="nowrap"><a href="http://web.archive.org/web/20140729113318/http://blog.mozilla.org/respindola/2011/05/12/cfi-directives/" title="29 Jul 2014"><strong>2014</strong></a></td>
+		      </tr>
+		    </tbody>
+		  </table>
+		</td>
+	      </tr>
+	      <tr>
+		<td class="s">
+		  		  <div id="wm-nav-captures"><a class="t" href="http://web.archive.org/web/*/http://blog.mozilla.org:80/respindola/2011/05/12/cfi-directives/" title="See a list of every capture for this URL">11 captures</a><div class="r" title="Timespan for captures of this URL">11 Jan 2013 - 27 Oct 2015</div></div>
+		</td>
+		<td class="k">
+		  <a href="http://web.archive.org/web/19980501000000/http://blog.mozilla.org:80/respindola/2011/05/12/cfi-directives/" id="wm-graph-anchor">
+		    <div id="wm-ipp-sparkline" title="Explore captures for this URL" style="position: relative">
+		      <canvas id="wm-sparkline-canvas" width="550" height="27" border="0"></canvas>
+		    <div class="yt" style="display: none; width: 25px; height: 27px; left: 50px;"></div><div class="mt" style="display: none; width: 2px; height: 27px; left: 59px;"></div></div>
+		  </a>
+		</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</td>
+	<td class="r">
+	  <a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org:80/respindola/2011/05/12/cfi-directives/#" onclick="window.open(&#39;https://www.facebook.com/sharer/sharer.php?u=http://web.archive.org/web/20130428074333/http://blog.mozilla.org:80/respindola/2011/05/12/cfi-directives/&#39;, &#39;&#39;, &#39;height=400,width=600&#39;); return false;" title="Share on Facebook" style="top: 4px; right: 16px;" target="_blank"><span class="iconochive-facebook" style="color:#3b5998;font-size:160%;"></span></a>
+	  <a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org:80/respindola/2011/05/12/cfi-directives/#" onclick="window.open(&#39;https://twitter.com/intent/tweet?text=http://web.archive.org/web/20130428074333/http://blog.mozilla.org:80/respindola/2011/05/12/cfi-directives/&amp;via=internetarchive&#39;, &#39;&#39;, &#39;height=400,width=600&#39;); return false;" title="Share on Twitter" style="bottom:14px;right:16px;" target="_blank"><span class="iconochive-twitter" style="color:#1dcaff;font-size:160%;"></span></a>
+	  <a href="http://faq.web.archive.org/" title="Get some help using the Wayback Machine" style="bottom:14px;right:5px;padding-right:0;"><span class="iconochive-question" style="color:rgb(87,186,244);font-size:160%;"></span></a>
+	  <a id="wm-tb-close" href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org:80/respindola/2011/05/12/cfi-directives/#close" onclick="__wm.h(event);return false;" style="top:-2px;right:0;padding-right:0;" title="Close the toolbar"><span class="iconochive-remove-circle" style="color:#888888;font-size:240%;"></span></a>
+	  <a id="wm-expand" class="wm-btn" href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org:80/respindola/2011/05/12/cfi-directives/#expand" onclick="__wm.ex(event);return false;"><span class="iconochive-down-solid"></span> <span style="font-size:80%">About this capture</span></a>
+	</td>
+      </tr>
+    </tbody>
+  </table>
+    <div id="wm-capinfo" style="border-top:1px solid #777;display:none;">
+            <div style="background-color:#353535;color:#aaa;font-weight:bold;text-align:center;"><a class="wm-selector selected" href="javascript:void(0)">COLLECTED BY</a></div>
+    <div style="padding:3px;position:relative;">
+            <div style="display:inline-block;vertical-align:top;width:50%;">
+			<span class="c-logo" style="background-image:url(https://archive.org/services/img/alexacrawls);"></span>
+		Organization: <a style="color:#33f;" href="https://archive.org/details/alexacrawls" target="_new"><span class="wm-title">Alexa Crawls</span></a>
+		<div style="max-height:75px;overflow:hidden;position:relative;">
+	  <div style="position:absolute;top:0;left:0;width:100%;height:75px;background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,0) 90%,rgba(255,255,255,255) 100%);"></div>
+	  Starting in 1996, <a href="http://www.alexa.com/">Alexa Internet</a> has been donating their crawl data to the Internet Archive.  Flowing in every day, these data are added to the <a href="http://web.archive.org/">Wayback Machine</a> after an embargo period.
+	</div>
+	      </div>
+      <div style="display:inline-block;vertical-align:top;width:49%;">
+			<span class="c-logo" style="background-image:url(https://archive.org/services/img/alexacrawls)"></span>
+		<div>Collection: <a style="color:#33f;" href="https://archive.org/details/alexacrawls" target="_new"><span class="wm-title">Alexa Crawls</span></a></div>
+		<div style="max-height:75px;overflow:hidden;position:relative;">
+	  <div style="position:absolute;top:0;left:0;width:100%;height:75px;background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,0) 90%,rgba(255,255,255,255) 100%);"></div>
+	  Starting in 1996, <a href="http://www.alexa.com/">Alexa Internet</a> has been donating their crawl data to the Internet Archive.  Flowing in every day, these data are added to the <a href="http://web.archive.org/">Wayback Machine</a> after an embargo period.
+	</div>
+	      </div>
+    </div></div></div></div></div><!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<script type="text/javascript" src="./CFI directives _ Rafael Espindola&#39;s Blog_files/timestamp.js" charset="utf-8"></script>
+<script type="text/javascript" src="./CFI directives _ Rafael Espindola&#39;s Blog_files/graph-calc.js" charset="utf-8"></script>
+<script type="text/javascript" src="./CFI directives _ Rafael Espindola&#39;s Blog_files/auto-complete.js" charset="utf-8"></script>
+<script type="text/javascript" src="./CFI directives _ Rafael Espindola&#39;s Blog_files/toolbar.js" charset="utf-8"></script>
+
+<style type="text/css">
+body {
+  margin-top:0 !important;
+  padding-top:0 !important;
+  min-width:800px !important;
+}
+.wb-autocomplete-suggestions {
+    text-align: left; cursor: default; border: 1px solid #ccc; border-top: 0; background: #fff; box-shadow: -1px 1px 3px rgba(0,0,0,.1);
+    position: absolute; display: none; z-index: 2147483647; max-height: 254px; overflow: hidden; overflow-y: auto; box-sizing: border-box;
+}
+.wb-autocomplete-suggestion { position: relative; padding: 0 .6em; line-height: 23px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 1.02em; color: #333; }
+.wb-autocomplete-suggestion b { font-weight: bold; }
+.wb-autocomplete-suggestion.selected { background: #f0f0f0; }
+</style>
+<script type="text/javascript">
+__wm.bt(550,27,25,2,"web","http://blog.mozilla.org:80/respindola/2011/05/12/cfi-directives/","2013-04-28",1996);
+</script><div class="wb-autocomplete-suggestions "></div>
+<!-- END WAYBACK TOOLBAR INSERT -->
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/" title="Rafael Espindola&#39;s Blog" rel="home">Rafael Espindola's Blog</a>
+					</span>
+				</div>
+				<div id="site-description">Just another Blog.mozilla.com site</div>
+
+										<img src="./CFI directives _ Rafael Espindola&#39;s Blog_files/path.jpg" width="940" height="198" alt="">
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org:80/respindola/2011/05/12/cfi-directives/#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu"><ul><li><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/" title="Home">Home</a></li><li class="page_item page-item-2"><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/about/">About</a></li></ul></div>
+			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+			
+
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/05/06/firefox-builds-with-clang/" rel="prev"><span class="meta-nav">←</span> Firefox builds with clang</a></div>
+					<div class="nav-next"><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/05/31/misc-updates/" rel="next">Misc updates <span class="meta-nav">→</span></a></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-277" class="post-277 post type-post status-publish format-standard hentry category-uncategorized">
+					<h1 class="entry-title">CFI directives</h1>
+
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/05/12/cfi-directives/" title="1:21 am" rel="bookmark"><span class="entry-date">May 12, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/author/respindola/" title="View all posts by respindola">respindola</a></span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						<h1> Frame pointers </h1>
+<p>Producing a backtrace is a common operation while debugging. The traditional way of doing it is to code every function like this:</p>
+<pre>pushl	%ebp
+movl	%esp, %ebp
+...
+popl	%ebp
+ret
+</pre>
+<p>The debugger can then easily fetch the old stack pointer and keep unwinding. This scheme has some nice advantages. It is simple to use and simple to code, even with hand written assembly.</p>
+<p>Some of the problems with it are that it requires <tt>ebp</tt> to be dedicated as a frame pointer and that the unwind info is encoded as executable code. Perhaps a more important problem is that not enough information is encoded. When moving up the stack, it would be good to know how to restore registers other than the stack pointer. It would also be good to know what was the source language, so that this info could be used for exception handling.</p>
+<h1> .debug_frame and .eh_frame </h1>
+<p>Dwarf defines a .debug_frame section that solves the unwinding problem in a different way. The code can use ebp as a regular register, but when it saves esp it must produce a note in the .debug_frame section telling the debugger what instruction saves it and where.</p>
+<p>This scheme is more general since it can tell the debugger how to restore more than just <tt>ebp</tt>. It is also out of band, so it will not consume cycles or address space. The dwarf scheme is still not sufficient for exception handling as it has no support for specifying the original language and any info used by exception handling needs to be loaded with the program.</p>
+<p>For exception handling, modern linux systems use an .eh_frame section. This section is similar to .debug_frame, but includes language specific info, has a slightly more compact encoding and is loaded with the program.</p>
+<p>A problem shared by both .debug_frame and .eh_frame is that the most direct way of producing them is a long table in the asm file. This introduces some inefficiencies in the encoding since the compiler (the tool printing the assembly) doesn’t know the exact sizes of the code. A table is also a lot harder to read:</p>
+<pre>       .section        .eh_frame,"a",@progbits
+.Lframe1:
+        .long   .LECIE1-.LSCIE1
+.LSCIE1:
+        .long   0x0
+        .byte   0x1
+        .string "zR"
+....
+</pre>
+<h1>CFI</h1>
+<p>The CFI directives are a way to improve the generation of <tt>.eh_frame</tt> and <tt>.debug_frame</tt>. They are a way to provide the assembler with a higher level view of what is going on and let it do the table generation. For example, the start of a regular function can look like</p>
+<p><tt><br>
+f:<br>
+	.cfi_startproc<br>
+	pushl	%ebp<br>
+	.cfi_def_cfa_offset 8<br>
+	.cfi_offset ebp, -8<br>
+</tt></p>
+<p>For the exact meaning of the directives, check the gas manual. Using the CFI directives makes the code easier to read again and the assembler can do a better job than the compiler since it knows the exact sizes.</p>
+<p>How does the assembler know if it should produce <tt>.debug_frame</tt> or <tt>.eh_frame</tt>? The compiler uses the special <tt>.cfi_sections</tt> directive that tells the assembler which sections it needs <em>for the file</em>. Which one should it use? If the ABI mandates or <em>some</em> function in the file has to handle exceptions, then you need <tt>.eh_frame</tt>. If it is just for debug, <tt>.debug_frame</tt> is probably the best.</p>
+<h1>Implementation in LLVM</h1>
+<p>Most of the assembler side (known in LLVM as MC) was implemented in 2.9 already, but CodeGen was not using it. Getting it to use it for ELF when producing .eh_frame was relatively simple and there were just some bugs relating to PIC encoding. It had a nice effect on the binary size produced by clang. A debug build of clang on x86_64 went from 690MB to 679MB.</p>
+<p>The generation of <tt>.debug_frame</tt> was also not hard to add. Just a matter of coding the differences to <tt>.eh_frame</tt>.</p>
+<p>Getting it to work on OS X was a bit more challenging. One of the problems was that the system assembler doesn’t support the CFI directives. One solution would be to keep the old code around for the cases that need it (llvm-gcc for example). This would be undesirable, as we would have almost duplicated code in MC and CodeGen.</p>
+<p>The solution comes from the observation that MC knows how to print assembly (using the MCAsmStreamer) and it also knows how to compute the tables (since it needs to produce them in the object files). What I did was add a feedback loop to MC: If targeting an old assembler, MCAsmStreamer will refuse to print the CFI directives and will instead just remember them. At the end of the file it can then print a table that the old assembler can understand.</p>
+<p>Another challenge for OS X support was that the linker requires that, for every function <tt>foo</tt>, there should be a <tt>foo.eh</tt> symbol pointing to its exception handling info. To implement this MC now keeps track of the last non private symbol that was output and uses that as the name. For example, this will produce a <tt>foo.eh</tt>:</p>
+<pre>.globl foo
+foo:
+.cfi_startproc
+</pre>
+<p>On OS X the linker was already optimizing the tables, so the savings were not as big, just  1.2 MB on a debug build of clang.</p>
+<p>In the end I think the strategy paid off. Codegen is now oblivious to the fact that the system assembler might not support the CFI directives and if it does (or we are producing .o files directly) we get better encoded tables. The patch series that implemented this had 76 patches, but in total  1728 lines were added and 1311 deleted <img src="./CFI directives _ Rafael Espindola&#39;s Blog_files/icon_smile.gif" alt=":-)" class="wp-smiley">  A lot more can be deleted once the old LLVM JIT is gone (it also has to emit these tables) and MC <em>is</em> the OS X system assembler.</p>
+<h1>Possible improvements</h1>
+<p>It is a bit silly that <tt>.eh_frame</tt> and <tt>.debug_frame</tt> use slightly different encodings. Since it looks like the one used by <tt>.eh_frame</tt> is the most compact and complete one, it might make sense to define a <tt>.eh_frame_na</tt> sections that uses the same encoding as <tt>.eh_frame</tt> but is not allocated.</p>
+<p>An attentive reader might have noticed that <tt>.cfi_sections</tt> is a setting for the full file. This can be suboptimal if a file compiled with <tt>-fno-exceptions</tt> is LTOed with one compiled with exceptions: The CodeGen has to be conservative and produce a <tt>.eh_frame</tt> for every function. It might be a good idea to add a new CFI directive (or an option to <tt>.cfi_startproc</tt>) that lets a single assembly file put some functions in the <tt>.eh_frame</tt> section and some other functions in <tt>.debug_frame</tt>.</p>
+<p>I don’t consider these improvements a very high priority, so if anyone wants to work on them, please do. The only note is that it is a good idea to coordinate with llvm and gas. We really don’t want the language supported by both assemblers to be incompatible.</p>
+											</div><!-- .entry-content -->
+
+
+					<div class="entry-utility">
+						This entry was posted in <a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/category/uncategorized/" title="View all posts in Uncategorized" rel="category tag">Uncategorized</a>. Bookmark the <a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/05/12/cfi-directives/" title="Permalink to CFI directives" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/05/06/firefox-builds-with-clang/" rel="prev"><span class="meta-nav">←</span> Firefox builds with clang</a></div>
+					<div class="nav-next"><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/05/31/misc-updates/" rel="next">Misc updates <span class="meta-nav">→</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+			<h3 id="comments-title">2 Responses to <em>CFI directives</em></h3>
+
+
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-415">
+		<div id="comment-415">
+			<div class="comment-author vcard">
+				<img alt="" src="./CFI directives _ Rafael Espindola&#39;s Blog_files/26009c96b735cdf18bb16734387a6e0d" class="avatar avatar-40 photo" height="40" width="40">				<cite class="fn">Jan Hubicka</cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/05/12/cfi-directives/comment-page-1/#comment-415">
+				May 15, 2011 at 1:08 pm</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>Nice to see this implemented.  Note that x86-64 ABI actually mandate eh frames everywhere. This was added to allow unwinding of stack everywhere as this is needed system wide in some occasions (like in garbage collector or profiling tools).<br>
+GCC thus on x86_64 defaults to EH frame generation and attempts to make it “everywhere exact”, while on most of other ABIs it defaults to EH frame generation only when EH frame is needed and it is precise only at the points of program that might trigger EH and thus unwinding.  This is controlled by -fasynchronous-unwind-info.</p>
+<p>I think, at least on Linux systems, LLVM should behave similarly producing eh frames by default for x86_64.</p>
+</div>
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-respindola bypostauthor odd alt thread-odd thread-alt depth-1" id="li-comment-416">
+		<div id="comment-416">
+			<div class="comment-author vcard">
+				<img alt="" src="./CFI directives _ Rafael Espindola&#39;s Blog_files/e3c468009b3eea1022e4da18df6e7cdc" class="avatar avatar-40 photo" height="40" width="40">				<cite class="fn">respindola</cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/05/12/cfi-directives/comment-page-1/#comment-416">
+				May 15, 2011 at 2:25 pm</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>The current logic should match gcc.  We always produce a eh_frame on x86-64.</p>
+<p>I would still be interesting in extending the cfi directives to allow per frame control. It should be possible to LTO a file compiled with -fno-asynchronous-unwind-info and one without and get unwind info only on the specified functions. It would also be useful for architectures that do not mandate an unwind info for every frame.</p>
+</div>
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	</li>
+			</ol>
+
+
+			<p class="nocomments">Comments are closed.</p>
+	
+
+								
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+<li id="search-2" class="widget-container widget_search"><form role="search" method="get" id="searchform" action="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/">
+	<div><label class="screen-reader-text" for="s">Search for:</label>
+	<input type="text" value="" name="s" id="s">
+	<input type="submit" id="searchsubmit" value="Search">
+	</div>
+	</form></li>		<li id="recent-posts-2" class="widget-container widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+					<li>
+				<a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2012/08/30/histogram-of-a-sunspider-benchmark/" title="Histogram of a sunspider benchmark">Histogram of a sunspider benchmark</a>
+						</li>
+					<li>
+				<a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2012/08/01/firefox-switched-to-clang-on-os-x/" title="Firefox switched to clang on OS X.">Firefox switched to clang on OS X.</a>
+						</li>
+					<li>
+				<a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/12/08/comunidades-de-software-livre/" title="Comunidades de Software Livre">Comunidades de Software Livre</a>
+						</li>
+					<li>
+				<a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/12/08/open-source-communities/" title="Open source communities">Open source communities</a>
+						</li>
+					<li>
+				<a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/12/07/reading-email/" title="Reading email">Reading email</a>
+						</li>
+				</ul>
+		</li><li id="recent-comments-2" class="widget-container widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><a href="http://web.archive.org/web/20130428074333/http://smartsystemsint.com/" rel="external nofollow" class="url">Thorn of Girl...</a> on <a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/04/27/building-firefox-with-clang-is-one-merge-away/comment-page-252/#comment-133628">Building Firefox with clang is one merge away</a></li><li class="recentcomments"><a href="http://web.archive.org/web/20130428074333/http://posterous.com/" rel="external nofollow" class="url">isabel4758</a> on <a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/07/26/building-firefox-on-os-x-lion/comment-page-355/#comment-133627">Building firefox on OS X Lion</a></li><li class="recentcomments"><a href="http://web.archive.org/web/20130428074333/http://important-component-in-the-general/" rel="external nofollow" class="url">important source</a> on <a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/08/08/quick-update-on-clang-builds/comment-page-157/#comment-133626">Quick update on clang builds</a></li><li class="recentcomments"><a href="http://web.archive.org/web/20130428074333/http://hardharrys.com/" rel="external nofollow" class="url">this</a> on <a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/02/23/lto-with-elfhack/comment-page-266/#comment-133625">LTO with elfhack</a></li><li class="recentcomments"><a href="http://web.archive.org/web/20130428074333/http://www.iamsport.org/mod/blog/?username=evolvinghair" rel="external nofollow" class="url">Clicking Here</a> on <a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/02/04/clang-results/comment-page-262/#comment-133624">Clang results</a></li></ul></li><li id="archives-2" class="widget-container widget_archive"><h3 class="widget-title">Archives</h3>		<ul>
+			<li><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2012/08/" title="August 2012">August 2012</a></li>
+	<li><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/12/" title="December 2011">December 2011</a></li>
+	<li><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/11/" title="November 2011">November 2011</a></li>
+	<li><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/09/" title="September 2011">September 2011</a></li>
+	<li><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/08/" title="August 2011">August 2011</a></li>
+	<li><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/07/" title="July 2011">July 2011</a></li>
+	<li><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/05/" title="May 2011">May 2011</a></li>
+	<li><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/04/" title="April 2011">April 2011</a></li>
+	<li><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/03/" title="March 2011">March 2011</a></li>
+	<li><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/02/" title="February 2011">February 2011</a></li>
+	<li><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/2011/01/" title="January 2011">January 2011</a></li>
+		</ul>
+</li><li id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-1"><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/category/uncategorized/" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+		</ul>
+</li><li id="meta-2" class="widget-container widget_meta"><h3 class="widget-title">Meta</h3>			<ul>
+						<li><a href="http://web.archive.org/web/20130428074333/https://blog.mozilla.org/respindola/wp-login.php">Log in</a></li>
+			<li><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/feed/" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://web.archive.org/web/20130428074333/http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
+						</ul>
+</li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="site-info">
+				<a href="http://web.archive.org/web/20130428074333/http://blog.mozilla.org/respindola/" title="Rafael Espindola&#39;s Blog" rel="home">
+					Rafael Espindola's Blog				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+								<a href="http://web.archive.org/web/20130428074333/http://wordpress.org/" title="Semantic Personal Publishing Platform">Proudly powered by WordPress.</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+
+
+</body></html>

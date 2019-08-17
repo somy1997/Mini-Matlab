@@ -1,0 +1,8 @@
+snazzle5: lex.yy.c snazzle4.tab.c snazzle4.tab.h
+	g++ snazzle4.tab.c lex.yy.c -lfl -o snazzle5
+lex.yy.c: snazzle5.l snazzle4.tab.h
+	flex snazzle5.l
+snazzle4.tab.c snazzle4.tab.h: snazzle4.y
+	bison -d snazzle4.y
+clean: 
+	rm snazzle5 lex.yy.c snazzle4.tab.c snazzle4.tab.h

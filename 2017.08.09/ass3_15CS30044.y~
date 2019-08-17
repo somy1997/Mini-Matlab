@@ -1,0 +1,534 @@
+%{
+#include <stdio.h>
+int yyerror(char *);
+extern int yylex(void);
+%}
+
+%token UNSIGNED
+%token BREAK
+%token RETURN
+%token VOID
+%token CASE
+%token FLOAT
+%token SHORT
+%token CHAR
+%token FOR
+%token SIGNED
+%token WHILE
+%token GOTO
+%token BOOL
+%token CONTINUE
+%token IF
+%token DEFAULT
+%token DO
+%token INT
+%token SWITCH
+%token DOUBLE
+%token LONG
+%token ELSE
+%token MATRIX
+
+%token ID
+
+%token IC
+%token FC
+%token CC
+%token ZC
+
+%token SL
+
+%token LSQ
+%token RSQ
+%token LPA
+%token RPA
+%token LCU
+%token RCU
+%token DOT
+%token ARROW
+%token INC
+%token DEC
+%token BITAND
+%token MULT
+%token PLUS
+%token MINUS
+%token NEG
+%token NOT
+%token DIV
+%token REM
+%token LSHIFT
+%token RSHIFT
+%token LT
+%token GT
+%token LTE
+%token GTE
+%token EQ
+%token NOTEQ
+%token XOR
+%token BITOR
+%token AND
+%token OR
+%token COND
+%token COLON
+%token SEMI
+%token ASSIGN
+%token MULTEQ
+%token DIVEQ
+%token REMEQ
+%token PLUSEQ
+%token MINUSEQ
+%token LSHEQ
+%token RSHEQ
+%token ANDEQ
+%token XOREQ
+%token OREQ
+%token COMMA
+%token HASH
+%token DASH
+
+%token MlCom
+%token SlCom
+
+%start translation_unit
+
+%%
+
+primary_expression: ID
+{ printf("primary_expression  =>  identifier\n"); }
+| constant
+{ printf("primary_expression  =>  constant\n"); }
+| SL
+{ printf("primary_expression  =>  string_literal\n"); }
+| LPA expression RPA
+{ printf("primary_expression  =>  (expression)\n"); }
+;
+
+constant: IC
+{ printf("constant  =>  INTEGER CONSTANT\n"); }
+| FC
+{ printf("constant  =>  FLOAT CONSTANT\n"); }
+| CC
+{ printf("constant  =>  CHARACTER CONSTANT\n"); }
+| ZC
+{ printf("constant  =>  ZERO CONSTANT\n"); }
+;
+
+postfix_expression: primary_expression
+{ printf("postfix_expression  =>  primary_expression\n"); }
+| postfix_expression LSQ expression RSQ
+{ printf("postfix_expression  =>  postfix_expression [ expression ]\n"); }
+| postfix_expression LPA argument_expression_list RPA
+{ printf("postfix_expression  =>  postfix_expression ( argument_expression_list )\n"); }
+| postfix_expression LPA RPA
+{ printf("postfix_expression  =>  postfix_expression ( )\n"); }
+| postfix_expression DOT ID
+{ printf("postfix_expression  =>  postfix_expression . identifier\n"); }
+| postfix_expression ARROW ID
+{ printf("postfix_expression  =>  postfix_expression − > identifier\n"); }
+| postfix_expression INC
+{ printf("postfix_expression  =>  postfix_expression ++\n"); }
+| postfix_expression DEC
+{ printf("postfix_expression  =>  postfix_expression −−\n"); }
+| postfix_expression DASH
+{ printf("postfix_expression  =>  postfix_expression .’\n"); }
+;
+
+argument_expression_list: assignment_expression
+{ printf("argument_expression_list  =>  assignment_expression\n"); }
+| argument_expression_list COMMA assignment_expression
+{ printf("argument_expression_list  =>  argument_expression_list , assignment_expression\n"); }
+;
+
+unary_expression: postfix_expression
+{ printf("unary_expression  =>  postfix_expression\n"); }
+| INC unary_expression
+{ printf("unary_expression  =>  ++ unary_expression\n"); }
+| MINUS unary_expression
+{ printf("unary_expression  =>  – unary_expression\n"); }
+| unary_operator cast_expression
+{ printf("unary_expression  =>  unary_operator cast_expression\n"); }
+;
+
+unary_operator: BITAND
+{ printf("unary_operator  =>  &\n"); }
+| MULT
+{ printf("unary_operator  =>  *\n"); }
+| PLUS
+{ printf("unary_operator  =>  +\n"); }
+;
+
+cast_expression: unary_expression
+{ printf("cast_expression  =>  unary_expression\n"); }
+;
+
+multiplicative_expression: cast_expression
+{ printf("multiplicative_expression  =>  cast_expression\n"); }
+| multiplicative_expression MULT cast_expression
+{ printf("multiplicative_expression  =>  multiplicative_expression * cast_expression\n"); }
+| multiplicative_expression DIV cast_expression
+{ printf("multiplicative_expression  =>  multiplicative_expression / cast_expression\n"); }
+| multiplicative_expression REM cast_expression
+{ printf("multiplicative_expression  =>  multiplicative_expression % cast_expression\n"); }
+;
+
+additive_expression: multiplicative_expression
+{ printf("additive_expression  =>  multiplicative_expression\n"); }
+| additive_expression PLUS multiplicative_expression
+{ printf("additive_expression  =>  additive_expression + multiplicative_expression\n"); }
+| additive_expression MINUS multiplicative_expression
+{ printf("additive_expression  =>  additive_expression - multiplicative_expression\n"); }
+;
+
+shift_expression: additive_expression
+{ printf("shift_expression  =>  additive_expression\n"); }
+| shift_expression LSHIFT additive_expression
+{ printf("shift_expression  =>  shift_expression << additive_expression\n"); }
+| shift_expression RSHIFT additive_expression
+{ printf("shift_expression  =>  shift_expression >> additive_expression\n"); }
+;
+
+relational_expression: shift_expression
+{ printf("relational_expression  =>  shift_expression\n"); }
+| relational_expression LT shift_expression
+{ printf("relational_expression  =>  relational_expression < shift_expression\n"); }
+| relational_expression GT shift_expression
+{ printf("relational_expression  =>  relational_expression > shift_expression\n"); }
+| relational_expression LTE shift_expression
+{ printf("relational_expression  =>  relational_expression <= shift_expression\n"); }
+| relational_expression GTE shift_expression
+{ printf("relational_expression  =>  relational_expression >= shift_expression\n"); }
+;
+
+equality_expression: relational_expression
+{ printf("equality_expression  =>  relational_expression\n"); }
+| equality_expression EQ relational_expression
+{ printf("equality_expression  =>  equality_expression == relational_expression\n"); }
+| equality_expression NOTEQ relational_expression
+{ printf("equality_expression  =>  equality_expression != relational_expression\n"); }
+;
+
+AND_expression: equality_expression
+{ printf("AND_expression  =>  equality_expression\n"); }
+| AND_expression BITAND equality_expression
+{ printf("AND_expression  =>  AND_expression & equality_expression\n"); }
+;
+
+exclusive_OR_expression: AND_expression
+{ printf("exclusive_OR_expression  =>  AND_expression\n"); }
+| exclusive_OR_expression XOR AND_expression
+{ printf("exclusive_OR_expression  =>  exclusive_OR_expression ∧ AND_expression\n"); }
+;
+
+inclusive_OR_expression: exclusive_OR_expression
+{ printf("inclusive_OR_expression  =>  exclusive_OR_expression\n"); }
+| inclusive_OR_expression BITOR exclusive_OR_expression
+{ printf("inclusive_OR_expression  =>  inclusive_OR_expression | exclusive_OR_expression\n"); }
+;
+
+logical_AND_expression: inclusive_OR_expression
+{ printf("logical_AND_expression  =>  inclusive_OR_expression\n"); }
+| logical_AND_expression AND inclusive_OR_expression
+{ printf("logical_AND_expression  =>  logical_AND_expression && inclusive_OR_expression\n"); }
+;
+
+logical_OR_expression: logical_AND_expression
+{ printf("logical_OR_expression  =>  logical_AND_expression\n"); }
+| logical_OR_expression OR logical_AND_expression
+{ printf("logical_OR_expression  =>  logical_OR_expression || logical_AND_expression\n"); }
+;
+
+conditional_expression: logical_OR_expression
+{ printf("conditional_expression  =>  logical_OR_expression\n"); }
+| logical_OR_expression COND expression COLON conditional_expression
+{ printf("conditional_expression  =>  logical_OR_expression ? expression : conditional_expression\n"); }
+;
+
+assignment_expression: conditional_expression
+{ printf("assignment_expression  =>  conditional_expression\n"); }
+| unary_expression assignment_operator assignment_expression
+{ printf("assignment_expression  =>  unary_expression assignment_operator assignment_expression\n"); }
+;
+
+assignment_operator: ASSIGN
+{ printf("assignment_operator  =>  =\n"); }
+| MULTEQ
+{ printf("assignment_operator  =>  *=\n"); }
+| DIVEQ
+{ printf("assignment_operator  =>  /=\n"); }
+| REMEQ
+{ printf("assignment_operator  =>  %=\n"); }
+| PLUSEQ
+{ printf("assignment_operator  =>  +=\n"); }
+| MINUSEQ
+{ printf("assignment_operator  =>  -=\n"); }
+| LSHEQ
+{ printf("assignment_operator  =>  <<=\n"); }
+| RSHEQ
+{ printf("assignment_operator  =>  >>=\n"); }
+| ANDEQ
+{ printf("assignment_operator  =>  &=\n"); }
+| XOREQ
+{ printf("assignment_operator  =>  ^=\n"); }
+| OREQ
+{ printf("assignment_operator  =>  |=\n"); }
+;
+
+expression: assignment_expression
+{ printf("expression  =>  assignment_expression\n"); }
+| expression COMMA assignment_expression
+{ printf("expression  =>  expression , assignment_expression\n"); }
+;
+
+constant_expression: conditional_expression
+{ printf("constant_expression  =>  conditional_expression\n"); }
+;
+
+
+
+declaration: declaration_specifiers init_declarator_list SEMI
+{ printf("declaration  =>  declaration_specifiers init_declarator_list ;\n"); }
+| declaration_specifiers SEMI
+{ printf("declaration  =>  declaration_specifiers ;\n"); }
+;
+
+declaration_specifiers: type_specifier declaration_specifiers
+{ printf("declaration_specifiers  =>  type_specifier declaration_specifiers\n"); }
+| type_specifier
+{ printf("declaration_specifiers  =>  type_specifier\n"); }
+;
+
+init_declarator_list: init_declarator
+{ printf("init_declarator_list  =>  init_declarator\n"); }
+| init_declarator_list COMMA init_declarator
+{ printf("init_declarator_list  =>  init_declarator_list, init_declarator\n"); }
+;
+
+init_declarator: declarator
+{ printf("init_declarator  =>  declarator\n"); }
+| declarator ASSIGN initializer
+{ printf("init_declarator  =>  declarator = initializer\n"); }
+;
+
+type_specifier: VOID
+{ printf("type_specifier  =>  void\n"); }
+| CHAR
+{ printf("type_specifier  =>  char\n"); }
+| SHORT
+{ printf("type_specifier  =>  short\n"); }
+| INT
+{ printf("type_specifier  =>  int\n"); }
+| LONG
+{ printf("type_specifier  =>  long\n"); }
+| FLOAT
+{ printf("type_specifier  =>  float\n"); }
+| DOUBLE
+{ printf("type_specifier  =>  double\n"); }
+| MATRIX
+{ printf("type_specifier  =>  Matrix\n"); }
+| SIGNED
+{ printf("type_specifier  =>  signed\n"); }
+| UNSIGNED
+{ printf("type_specifier  =>  unsigned\n"); }
+| BOOL
+{ printf("type_specifier  =>  Bool\n"); }
+;
+
+declarator: direct_declarator
+{ printf("declarator  =>  direct_declarator\n"); }
+| pointer direct_declarator
+{ printf("declarator  =>  pointer direct_declarator\n"); }
+;
+
+direct_declarator: ID
+{ printf("direct_declarator  =>  identifier\n"); }
+| LPA declarator RPA
+{ printf("direct_declarator  =>  (declarator)\n"); }
+| direct_declarator LSQ assignment_expression RSQ
+{ printf("direct_declarator  =>  direct_declarator [ assignment_expression ]\n"); }
+| direct_declarator LSQ RSQ
+{ printf("direct_declarator  =>  direct_declarator [ ]\n"); }
+| direct_declarator LPA parameter_type_list RPA
+{ printf("direct_declarator  =>  direct_declarator ( parameter_type_list )\n"); }
+| direct_declarator LPA identifier_list RPA
+{ printf("direct_declarator  =>  direct_declarator ( identifier_list )\n"); }
+| direct_declarator LPA RPA
+{ printf("direct_declarator  =>  direct_declarator ( )\n"); }
+;
+
+pointer: MULT pointer
+{ printf("pointer  =>  * pointer\n"); }
+| MULT
+{ printf("pointer  =>  *\n"); }
+;
+
+parameter_type_list: parameter_list
+{ printf("parameter_type_list  =>  parameter_list\n"); }
+;
+
+parameter_list: parameter_declaration
+{ printf("parameter_list  =>  parameter_declaration\n"); }
+| parameter_list COMMA parameter_declaration
+{ printf("parameter_list  =>  parameter_list , parameter_declaration\n"); }
+;
+
+parameter_declaration: declaration_specifiers declarator
+{ printf("parameter_declaration  =>  declaration_specifiers declarator\n"); }
+| declaration_specifiers
+{ printf("parameter_declaration  =>  declaration_specifiers\n"); }
+;
+
+identifier_list: ID
+{ printf("identifier_list  =>  identifier\n"); }
+| identifier_list COMMA ID
+{ printf("identifier_list  =>  identifier_list , identifier\n"); }
+;
+
+initializer: assignment_expression
+{ printf("initializer  =>  assignment_expression\n"); }
+| LCU initializer_row_list RCU
+{ printf("initializer  =>  { initializer_row_list }\n"); }
+;
+
+initializer_row_list: initializer_row
+{ printf("initializer_row_list  =>  initializer_row\n"); }
+| initializer_row_list SEMI initializer_row
+{ printf("initializer_row_list  =>  initializer_row_list ; initializer_row\n"); }
+;
+
+initializer_row: designation initializer
+{ printf("initializer_row  =>  designation initializer\n"); }
+| initializer
+{ printf("initializer_row  =>  initializer\n"); }
+| initializer_row COMMA designation initializer
+{ printf("initializer_row  =>  initializer_row, designation initializer\n"); }
+| initializer_row COMMA initializer
+{ printf("initializer_row  =>  initializer_row,  initializer\n"); }
+;
+
+designation: designator_list ASSIGN
+{ printf("designation  =>  designator_list =\n"); }
+;
+
+designator_list: designator
+{ printf("designator_list  =>  designator\n"); }
+| designator_list designator
+{ printf("designator_list  =>  designator_list designator\n"); }
+;
+
+designator: LSQ constant_expression RSQ
+{ printf("designator  =>  [ constant_expression ]\n"); }
+| DOT ID
+{ printf("designator  =>  . identifier\n"); }
+;
+
+
+
+statement: labeled_statement
+{ printf("statement  =>  labeled_statement\n"); }
+| compound_statement
+{ printf("statement  =>  compound_statement\n"); }
+| expression_statement
+{ printf("statement  =>  expression_statement\n"); }
+| selection_statement
+{ printf("statement  =>  selection_statement\n"); }
+| iteration_statement
+{ printf("statement  =>  iteration_statement\n"); }
+| jump_statement
+{ printf("statement  =>  jump_statement\n"); }
+;
+
+labeled_statement: ID COLON statement
+{ printf("labeled_statement  =>  identifier : statement\n"); }
+| CASE constant_expression COLON statement
+{ printf("labeled_statement  =>  case constant_expression : statement\n"); }
+| DEFAULT COLON statement
+{ printf("labeled_statement  =>  default : statement\n"); }
+;
+
+compound_statement: LCU block_item_list RCU
+{ printf("compound_statement  =>  { block_item_list }\n"); }
+| LCU RCU
+{ printf("compound_statement  =>  { }\n"); }
+;
+
+block_item_list: block_item
+{ printf("block_item_list  =>  block_item\n"); }
+| block_item_list block_item
+{ printf("block_item_list  =>  block_item_list block_item\n"); }
+;
+
+block_item: declaration
+{ printf("block_item  =>  declaration\n"); }
+| statement
+{ printf("block_item  =>  statement\n"); }
+;
+
+expression_statement: expression SEMI
+{ printf("expression_statement  =>  expression ;\n"); }
+| SEMI
+{ printf("expression_statement  =>  ;\n"); }
+;
+
+selection_statement: IF LPA expression RPA statement
+{ printf("selection_statement  =>  if ( expression ) statement\n"); }
+| IF LPA expression RPA statement ELSE statement
+{ printf("selection_statement  =>  if ( expression ) statement else statement\n"); }
+| SWITCH LPA expression RPA statement
+{ printf("selection_statement  =>  switch ( expression ) statement\n"); }
+;
+
+iteration_statement: WHILE LPA expression RPA statement
+{ printf("iteration_statement  =>  while ( expression ) statement\n"); }
+| DO statement WHILE LPA expression RPA
+{ printf("iteration_statement  =>  do statement while ( expression ) ;\n"); }
+| FOR LPA expression_opt SEMI expression_opt SEMI expression_opt RPA statement
+{ printf("iteration_statement  =>  for ( expression_opt ; expression_opt ; expression_opt ) statement\n"); }
+| FOR LPA declaration expression_opt SEMI expression_opt RPA statement
+{ printf("iteration_statement  =>  for ( declaration expression_opt ; expression_opt ) statement\n"); }
+;
+
+expression_opt:
+{ printf("expression_opt  =>  EMPTY STRING\n"); }
+| expression
+{ printf("expression_opt  =>  expression\n"); }
+;
+
+jump_statement: GOTO ID SEMI
+{ printf("jump_statement  =>  goto identifier ;\n"); }
+| CONTINUE SEMI
+{ printf("jump_statement  =>  continue ;\n"); }
+| BREAK SEMI
+{ printf("jump_statement  =>  break ;\n"); }
+| RETURN expression_opt SEMI
+{ printf("jump_statement  =>  return expression_opt ;\n"); }
+;
+
+
+
+translation_unit: external_declaration
+{ printf("translation_unit  =>  external_declaration\n"); }
+| translation_unit external_declaration
+{ printf("translation_unit  =>  translation_unit external_declaration\n"); }
+;
+
+external_declaration: function_definition
+{ printf("external_declaration  =>  function_definition\n"); }
+| declaration
+{ printf("external_declaration  =>  declaration\n"); }
+;
+
+function_definition: declaration_specifiers declarator declaration_list_opt compound_statement
+{ printf("function_definition  =>  declaration_specifiers declarator declaration_list_opt compound_statement\n"); }
+;
+
+declaration_list_opt:
+{ printf("declaration_list_opt  =>  EMPTY STRING\n"); }
+| declaration_list_opt declaration
+{ printf("declaration_list_opt  =>  declaration_list_opt declaration\n"); }
+;
+
+%%
+
+int yyerror(char *s){
+  printf("Parser Error : %s\n",s);
+  return -1;
+}

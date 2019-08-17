@@ -1,0 +1,10 @@
+a.out: mainfunc.o libfunc.a
+	cc mainfunc.o -L. -lfunc
+mainfunc.o: mainfunc.c myl.h
+	cc -Wall -c mainfunc.c
+libfunc.a: func.o
+	ar -rcs libfunc.a func.o
+func.o: func.c myl.h
+	cc -Wall -c func.c
+clean:
+	rm a.out mainPrintInt.o libprintInt.a printInt.o

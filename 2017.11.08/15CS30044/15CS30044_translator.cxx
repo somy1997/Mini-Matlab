@@ -1,0 +1,668 @@
+#include "15CS30044_translator.h"
+#include "y.tab.h"
+
+int glob_type = tp_not_set;
+int next_instr,start_instr;
+int temp_count=0;
+symtab *glob_st = new symtab();
+symtab *curr_st = new symtab();
+quad_arr glob_quad;
+char str_of_int[5],str_of_2_int[5],str_of_double[5];
+
+void int2str(int a,char *str)
+{
+	sprintf(str,"%d",a);
+	//return str;
+}
+
+void double2str(double d,char *str)
+{
+	sprintf(str,"%lf",d);
+}
+
+
+void symdata::putsizename(char *str)
+{
+	switch(tp)
+	{
+		case tp_not_set:
+				sprintf(str,"Type not set");
+				break;
+		case tp_void:
+				sprintf(str,"Void");
+				break;
+		case tp_bool:
+				sprintf(str,"Bool");
+				break;
+		case tp_int:
+				sprintf(str,"Int");
+				break;
+		case tp_char:
+				sprintf(str,"Char");
+				break;
+		case tp_double:
+				sprintf(str,"Double");
+				break;
+		case tp_ptr:
+				tp = tp_of_ptr;
+				char ptr_str[30];
+				putsizename(ptr_str);
+				sprintf(str,"Pointer(%s)",ptr_str);
+				tp = tp_ptr;
+				break;
+		case tp_func:
+				sprintf(str,"Function");
+				break;
+		case tp_matrix:
+				sprintf(str,"Matrix(%d,%d,Double)",mat->number_rows,mat->number_cols);
+				break;
+		default:
+			printf("TYPE NOT FOUND\n");
+			exit(-1);
+	}
+}
+
+
+symdata::symdata()
+{
+	name="not set";
+	size=-1;
+	offset=-1;
+	isInitialized=false;
+	tp = tp_not_set;
+	tp_of_ptr = tp_not_set;
+	var_type = "not set";
+	nest_tab = NULL;
+	mat = NULL;
+}
+
+symdata::symdata(string name,int offset,string var_type,int tp,int tp_of_ptr) //symdata constructor for gentemp
+{
+	isInitialized = false;
+	this->name=name;
+	this->offset=offset;
+	this->var_type = var_type;
+	this->tp = tp;
+	this->tp_of_ptr = tp_of_ptr;
+	nest_tab = NULL;
+	mat = NULL;
+	if(tp==tp_matrix)
+	{
+		mat = new matrix;
+		mat->number_rows=-1;
+		mat->number_cols=-1;
+	}
+	setsize();
+}
+
+void symdata::setbasic(basic_value init)
+{
+	this->init = init;
+	isInitialized = true;
+}
+
+void symdata::setsize()
+{
+	switch(tp)
+	{
+		case tp_not_set:	size = -1;
+							break;
+		
+		case tp_void: 		size = 0;
+							break;
+		
+		case tp_bool:		size = size_of_bool;
+							break;
+		
+		case tp_char:		size = size_of_char;
+							break;
+		
+		case tp_int:		size = size_of_int;
+							break;
+		
+		case tp_double:		size = size_of_double;
+							break;
+		
+		case tp_ptr:		size = size_of_pointer;
+							break;
+		
+		case tp_func:		size = 0;
+							break;
+		
+		case tp_matrix:		if(mat->number_rows == -1 || mat->number_cols == -1)
+								size = 2*size_of_int;
+							else
+								size = (mat->number_rows)*(mat->number_cols)*8+8;
+							break;
+	}
+}
+
+int symdata::getsize()
+{
+	return size;
+}
+
+symtab::symtab()
+{
+	name="";
+	offset=0;
+}
+
+symdata* symtab::lookup(symdata* newsym)
+{
+	//printf("Flag2\n");
+	//printf("k%d\n",symbol_tab.size());
+	newsym->offset = offset;
+	newsym->setsize();
+	offset += newsym->getsize();
+	symbol_tab.push_back(newsym);
+	//printf("lol%s\n",temp_o->name.c_str());
+	//printf("%d\n",symbol_tab.size());
+	return symbol_tab[symbol_tab.size()-1];
+}
+
+symdata* symtab::search(string n)
+{
+	int i;
+	for(i=0;i<symbol_tab.size();i++)
+	{
+		if(symbol_tab[i]->name==n)
+		{
+			return (symbol_tab[i]);
+		}
+	}
+	return NULL;
+}
+
+symdata* symtab::gentemp(int tp,int tp_of_ptr)
+{
+	char c[10];
+	sprintf(c,"t%03d",temp_count);
+	temp_count++;
+	symdata *newtemp = new symdata(c,offset,"Temporary",tp,tp_of_ptr);         //tp_of_ptr required as when called from parser, parser would already know if its a pointer
+	symbol_tab.push_back(newtemp);
+	offset += newtemp->getsize();                                             //what if tp_not_set
+	return newtemp;
+}
+
+void symtab::update(symdata *sm,int tp,basic_value init)                   //not used
+{
+	sm->tp = tp;
+	sm->init = init;
+	sm->setsize();
+}
+
+void symtab::print()
+{
+	printf("\n");
+	printf("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+	printf("Symbol Table : %s\n\n",name.c_str());
+	//printf("Name\tValue\tvar_type\tsize\tOffset\tType\n");
+	printf("%-20s\t%-20s\t%-20s\t%-20s\t%-20s\t%-20s\t%-20s\t\n\n","Name","Type","Nature","Initial value","size","Offset","Nested Table");
+	int j,l;
+    for(int i = 0; i<(symbol_tab).size(); i++)
+    {
+        char str[30];
+        symdata *t = symbol_tab[i];
+        //Printing name
+        printf("%-20s\t",t->name.c_str());
+        //Printing type
+        t->putsizename(str);
+        printf("%-20s\t",str);
+        //Printing nature
+        printf("%-20s\t",t->var_type.c_str());
+        //Printing initial value
+        if(t->isInitialized == true)
+        {
+        	if(t->tp == tp_char)
+        	{ 
+        		sprintf(str,"\'%c\'",(t->init).c);
+        		printf("%-20s\t",str);
+        	}
+        	else if(t->tp == tp_int) 
+        	{
+        		sprintf(str,"%d",(t->init).i);
+        		printf("%-20s\t",str);
+        	}
+        	else if(t->tp == tp_double) 
+        	{
+        		sprintf(str,"%lf",(t->init).d);
+        		printf("%-20s\t",str);
+        	}
+        	else if(t->tp == tp_matrix)
+        	{
+        		
+        		printf("{");
+        		matrix *temp = symbol_tab[i]->mat;
+        		for(l=0; l<temp->number_rows-1; l++)
+        		{
+        			for(j=0; j<temp->number_cols-1; j++)
+        				printf(" %lf,",temp->mat[l][j]);
+        			printf(" %lf;",temp->mat[l][j]);
+        		}
+        		for(j=0; j<temp->number_cols-1; j++)
+        			printf(" %lf,",temp->mat[l][j]);
+        		printf(" %lf}",temp->mat[l][j]);
+        	}
+       	 	else
+       	 	{ 
+       	 		sprintf(str,"----");
+       	 		printf("%-20s\t",str);
+       	 	}
+      	}
+      	else
+      	{ 
+       	 	sprintf(str,"null");
+       	 	printf("%-20s\t",str);
+       	}
+       	//Printing size
+       	if(t->tp == tp_matrix)
+       	{
+        	sprintf(str,"%d+8",t->size-8);
+        	printf("%-20s\t",str);
+        }
+        else
+        {
+        	sprintf(str,"%d",t->size);
+        	printf("%-20s\t",str);
+		}
+		//Printing offset
+		sprintf(str,"%d",t->offset);
+        printf("%-20s\t",str);
+		//Printing pointer to nested symbol table
+		if(t->var_type == "func")
+			printf("ptr-to-St( %s )",t->nest_tab->name.c_str());
+		else
+			printf("null");
+
+		printf("\n");
+	}
+	printf("\n");
+	printf("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+}
+list* makelist(int i)
+{
+	list *temp = (list*)malloc(sizeof(list));
+	temp->index=i;
+	temp->next=NULL;
+	return temp;
+}
+list* merge(list *lt1,list *lt2)
+{
+	list *temp = (list*)malloc(sizeof(list));
+	list *p1=temp;
+	int flag=0;
+	list *l1=lt1;
+	list *l2=lt2;
+	while(l1!=NULL)
+	{
+		flag=1;
+		p1->index=l1->index;
+		if(l1->next!=NULL)
+		{
+			p1->next=(list*)malloc(sizeof(list));
+			p1=p1->next;
+		}
+		l1=l1->next;
+	}
+	while(l2!=NULL)
+	{
+		if(flag==1)
+		{
+			p1->next=(list*)malloc(sizeof(list));
+			p1=p1->next;
+			flag=0;
+		}
+		p1->index=l2->index;
+		if(l2->next!=NULL)
+		{
+			p1->next=(list*)malloc(sizeof(list));
+			p1=p1->next;
+		}
+		l2=l2->next;
+	}
+	p1->next=NULL;
+	return temp;
+}
+
+quad::quad(opcode opc,string a1,string a2,string rs)
+{
+	this->op=opc;
+	this->arg1=a1;
+	this->arg2=a2;
+	this->result=rs;
+}
+
+quad_arr::quad_arr()
+{
+	next_instr=0;
+}
+
+void quad_arr::emit(opcode opc, string arg1, string arg2, string result)
+{
+	if(result.size()!=0)
+	{
+		quad new_elem(opc,arg1,arg2,result);
+		arr.push_back(new_elem);
+	}
+	else if(arg2.size()!=0)
+	{
+		quad new_elem(opc,arg1,"",arg2);
+		arr.push_back(new_elem);
+	}
+	else if(arg1.size()!=0)
+	{
+		quad new_elem(opc,"","",arg1);
+		arr.push_back(new_elem);
+	}
+	else
+	{
+		quad new_elem(opc,"","","");
+		arr.push_back(new_elem);
+	}
+	next_instr=next_instr+1;
+}
+
+void quad_arr::emit(opcode opc, int val, string operand)
+{
+	char str[20];
+	sprintf(str, "%d", val);
+	if(operand.size()==0)
+	{
+		quad new_quad(opc,"","",str);
+		arr.push_back(new_quad);
+	}
+	else
+	{
+		quad new_quad(opc,str,"",operand);
+		arr.push_back(new_quad);
+	}
+	next_instr=next_instr+1;
+}
+
+void quad_arr::emit(opcode opc, double val, string operand)
+{
+	char str[20];
+	sprintf(str, "%lf", val);
+	if(operand.size()==0)
+	{
+		quad new_quad(opc,"","",str);
+		arr.push_back(new_quad);
+	}
+	else
+	{
+		quad new_quad(opc,str,"",operand);
+		arr.push_back(new_quad);
+	}
+	next_instr=next_instr+1;
+}
+
+void quad_arr::emit(opcode opc, char val, string operand)
+{
+	char str[20];
+	sprintf(str, "'%c'", val);
+	if(operand.size()==0)
+	{
+		quad new_quad(opc,"","",str);
+		arr.push_back(new_quad);
+	}
+	else
+	{
+		quad new_quad(opc,str,"",operand);
+		arr.push_back(new_quad);
+	}
+	next_instr=next_instr+1;
+}
+
+void quad_arr::print()
+{
+	opcode op;
+	string arg1;
+	string arg2;
+	string result;
+	char str[10];
+	for(int i=0;i<next_instr;i++)
+	{
+
+		op=arr[i].op;
+		arg1=arr[i].arg1;
+		arg2=arr[i].arg2;
+		result=arr[i].result;
+		sprintf(str,"%d.",i);
+		printf("%-4s :\t",str);
+		if(Q_PLUS<=op && op<=Q_NOT_EQUAL)
+	    {
+	        printf("%-4s",result.c_str());
+	        printf(" = ");
+	        printf("%s",arg1.c_str());
+	        printf(" ");
+	        switch(op)
+	        {
+	            case Q_PLUS: printf("+"); break;
+	            case Q_MINUS: printf("-"); break;
+	            case Q_MULT: printf("*"); break;
+	            case Q_DIVIDE: printf("/"); break;
+	            case Q_MODULO: printf("%%"); break;
+	            case Q_LEFT_OP: printf("<<"); break;
+	            case Q_RIGHT_OP: printf(">>"); break;
+	            case Q_XOR: printf("^"); break;
+	            case Q_AND: printf("&"); break;
+	            case Q_OR: printf("|"); break;
+	            case Q_LOG_AND: printf("&&"); break;
+	            case Q_LOG_OR: printf("||"); break;
+	            case Q_LESS: printf("<"); break;
+	            case Q_LESS_OR_EQUAL: printf("<="); break;
+	            case Q_GREATER_OR_EQUAL: printf(">="); break;
+	            case Q_GREATER: printf(">"); break;
+	            case Q_EQUAL: printf("=="); break;
+	            case Q_NOT_EQUAL: printf("!="); break;
+	        }
+	        printf(" ");
+	       	printf("%s\n",arg2.c_str());
+	    }
+	    else if(Q_UNARY_MINUS<=op && op<=Q_ASSIGN)
+	    {
+	        printf("%-4s",result.c_str());
+	        printf(" = ");
+	        switch(op)
+	        {
+	            
+	            //Unary Assignment Instruction
+	            case Q_UNARY_MINUS : printf("-"); break;
+	            case Q_UNARY_PLUS : printf("+"); break;
+	            case Q_COMPLEMENT : printf("~"); break;
+	            case Q_NOT : printf("!"); break;
+	            //Copy Assignment Instruction
+	            case Q_ASSIGN :  break;
+	        }
+	        printf("%s\n",arg1.c_str());
+	    }
+	    else if(op == Q_GOTO){printf("goto ");printf("%s\n",result.c_str());}
+	    else if(Q_IF_EXPRESSION<=op && op<=Q_IF_FALSE_EXPRESSION)
+	    {
+	    	printf("if");
+	    	if(op==Q_IF_FALSE_EXPRESSION)
+	    		printf("false");
+	    	printf(" %s",arg1.c_str());printf(" goto ");printf("%s\n",result.c_str());
+	    }
+	    else if(Q_IF_EQUAL<=op && op<=Q_IF_GREATER_OR_EQUAL)
+	    {
+	        printf("if ");printf("%s",arg1.c_str());printf(" ");
+	        switch(op)
+	        {
+	            //Conditional Jump
+	            case   Q_IF_LESS : printf("<"); break;
+	            case   Q_IF_GREATER : printf(">"); break;
+	            case   Q_IF_LESS_OR_EQUAL : printf("<="); break;
+	            case   Q_IF_GREATER_OR_EQUAL : printf(">="); break;
+	            case   Q_IF_EQUAL : printf("=="); break;
+	            case   Q_IF_NOT_EQUAL : printf("!="); break;
+	        }
+	        printf(" %s",arg2.c_str());printf(" goto ");printf("%s\n",result.c_str());            
+	    }
+	    else if(Q_CHAR2INT<=op && op<=Q_DOUBLE2INT)
+	    {
+	        printf("%-4s",result.c_str());printf(" = ");
+	        switch(op)
+	        {
+	            case Q_CHAR2INT : printf(" Char2Int(");printf("%s",arg1.c_str());printf(")\n"); break;
+	            case Q_CHAR2DOUBLE : printf(" Char2Double(");printf("%s",arg1.c_str());printf(")\n"); break;
+	            case Q_INT2CHAR : printf(" Int2Char(");printf("%s",arg1.c_str());printf(")\n"); break;
+	            case Q_DOUBLE2CHAR : printf(" Double2Char(");printf("%s",arg1.c_str());printf(")\n"); break;
+	            case Q_INT2DOUBLE : printf(" Int2Double(");printf("%s",arg1.c_str());printf(")\n"); break;
+	            case Q_DOUBLE2INT : printf(" Double2Int(");printf("%s",arg1.c_str());printf(")\n"); break;
+	        }            
+	    }
+	    else if(op == Q_PARAM)
+	    {
+	        printf("param ");printf("%s\n",result.c_str());
+	    }
+	    else if(op == Q_CALL)
+	    {
+	        if(!result.c_str())
+					printf("call %s, %s\n", arg1.c_str(), arg2.c_str());
+				else
+					printf("%-4s = call %s, %s\n", result.c_str(), arg1.c_str(), arg2.c_str());
+	    }
+	    else if(op == Q_RETURN)
+	    {
+	        printf("return ");printf("%s\n",result.c_str());
+	    }
+	    else if(op == Q_START)
+	    {
+	        printf("start ");printf("%s\n",result.c_str());
+	    }
+	    else if( op == Q_RINDEX)
+	    {
+	        printf("%-4s = %s[%s]\n", result.c_str(), arg1.c_str(), arg2.c_str());
+	    }
+	    else if(op == Q_LINDEX)
+	    {
+	        printf("%s[%s] = %s\n", result.c_str(), arg1.c_str(), arg2.c_str());
+	    }
+	    else if(op == Q_LDEREF)
+	    {
+	        printf("*%-3s = %s\n", result.c_str(), arg1.c_str());
+	    }
+	    else if(op == Q_RDEREF)
+	    {
+	    	printf("%-4s = *%s\n", result.c_str(), arg1.c_str());
+	    }
+	    else if(op == Q_ADDR)
+	    {
+	    	printf("%-4s = &%s\n", result.c_str(), arg1.c_str());
+	    }
+	}
+}
+
+void backpatch(list *l,int i)
+{
+	list *temp =l;
+	list *temp2;
+	char str[10];
+	sprintf(str,"%d",i);
+	while(temp!=NULL)
+	{
+		glob_quad.arr[temp->index].result = str;
+		temp2=temp;
+		temp=temp->next;
+		free(temp2);
+	}
+}
+
+void typecheck(expresn *e1,expresn *e2,bool isAssign)
+{
+	int type1,type2;
+	type1=e1->loc->tp;
+	type2=e2->loc->tp;
+	if(type1==type2)
+	{
+		return;
+	}
+	if(!isAssign)
+	{
+		if(type1>type2)
+		{
+			symdata *temp = curr_st->gentemp(e1->loc->tp);
+			if(type1 == tp_int && type2 == tp_char)
+			{
+				glob_quad.emit(Q_CHAR2INT, e2->loc->name, temp->name);
+			}
+			else if(type1 == tp_double && type2 == tp_int)
+			{
+				glob_quad.emit(Q_INT2DOUBLE, e2->loc->name, temp->name);
+			}
+			else
+			{
+				printf("ERROR : Types of %s and %s is not compatible.",e1->loc->name.c_str(),e2->loc->name.c_str());
+				exit(-1);
+			}
+			e2->loc = temp;
+		}
+		else
+		{
+			symdata *temp = curr_st->gentemp(e2->loc->tp);
+			if(type2 == tp_int && type1 == tp_char)
+			{
+				glob_quad.emit(Q_CHAR2INT, e1->loc->name, temp->name);
+			}
+			else if(type2 == tp_double && type1 == tp_int)
+			{
+				glob_quad.emit(Q_INT2DOUBLE, e1->loc->name, temp->name);
+			}
+			else
+			{
+				printf("ERROR : Types of %s and %s is not compatible.",e1->loc->name.c_str(),e2->loc->name.c_str());
+				exit(-1);
+			}
+			e1->loc = temp;
+		}		
+	}
+	else
+	{
+		symdata *temp = curr_st->gentemp(e1->loc->tp);
+		if(type1 == tp_int && type2 == tp_double)
+			glob_quad.emit(Q_DOUBLE2INT, e2->loc->name, temp->name);
+		else if(type1 == tp_double && type2 == tp_int)
+			glob_quad.emit(Q_INT2DOUBLE, e2->loc->name, temp->name);
+		else if(type1 == tp_char && type2 == tp_int)
+			glob_quad.emit(Q_INT2CHAR, e2->loc->name, temp->name);
+		else if(type1 == tp_int && type2 == tp_char)
+			glob_quad.emit(Q_CHAR2INT, e2->loc->name, temp->name);
+		else
+		{
+			printf("ERROR : %s , %s : Types compatibility not defined\n",e1->loc->name.c_str(),e2->loc->name.c_str());
+			exit(-1);
+		}
+		e2->loc = temp;
+	}
+}
+
+
+int main()
+{
+	int2str(size_of_int,str_of_int);
+	int2str(2*size_of_int,str_of_2_int);
+	int2str(size_of_double,str_of_double);
+	start_instr = next_instr;
+	glob_quad.emit(Q_START,"-1");
+	yyparse();
+	glob_quad.arr.pop_back();
+	next_instr--;
+	glob_st->name="Global";
+	printf("========================================================================================================================================================================================\n");
+	printf("Generated Quads for the program\n");
+	printf("========================================================================================================================================================================================\n");
+	printf("\n");
+	glob_quad.print();
+	printf("\n");
+	printf("========================================================================================================================================================================================\n");
+	printf("Symbol table Maintained For the Given Program\n");
+	printf("========================================================================================================================================================================================\n");
+	glob_st->print();
+	for(int i=0; i<glob_st->symbol_tab.size();i++)
+	{
+		((glob_st->symbol_tab[i])->nest_tab)->print();
+	}
+	return 0;
+}

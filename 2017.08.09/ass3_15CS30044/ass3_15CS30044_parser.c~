@@ -1,0 +1,9 @@
+#include "ass3_15CS30044.tab.h"
+
+extern int yyparse();
+
+int main()
+{
+	yyparse();
+	return 0;
+}

@@ -1,0 +1,20 @@
+//loops checking
+int main()
+{
+	int i=0,j=5,n=6;
+	while(i<j)
+	{
+		i++;
+		n--;
+	}
+	do
+	{
+		n++;
+		j--
+	}while(j>n);
+	for(j=0,i=1;j<n;j++)
+	{
+		i=i+n;
+		i--;		
+	}
+}

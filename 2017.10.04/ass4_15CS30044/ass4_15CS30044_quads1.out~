@@ -1,0 +1,28 @@
+==============================================================================
+Generated Quads for the program
+  0. :start	main
+  1. :t000	=	3.500000
+  2. :t001	=	 Double2Int(t000)
+  3. :retVal	=	t001
+  4. :return	retVal
+  5. :return	
+==============================================================================Symbol table Maintained For the Given Program
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Symbol Table : Global
+Name	Type (Variable Type)	Initial value	size	Offset	Nested Table	
+
+main                Function (func)	null	0	0	ptr-to-St( main )
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Symbol Table : main
+Name	Type (Variable Type)	Initial value	size	Offset	Nested Table	
+
+retVal              Int (return)	null	4	0	null
+t000                Double (Temporary)	3.500000	8	4	null
+t001                Int (Temporary)	null	4	12	null
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=============================================================================

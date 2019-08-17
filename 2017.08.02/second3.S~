@@ -1,0 +1,23 @@
+#include <asm/unistd.h>
+#include <syscall.h>
+#define STDOUT_FILENO 1
+
+.file "second3.S"
+.section .rodata
+L1:
+	.string "My Second program\n"
+L2:
+.text
+.globl _start
+
+_start:
+	movl $(SYS_write), %eax 		#eax <-- 1 (write) parameters to write
+	movq $(STDOUT_FILENO), %rdi 	# rdi <-- 1 (stdout)
+	movq $L1, %rsi 					# rsi <-- starting address of string
+	movq $(L2-L1), %rdx 			# rdx <-- L2 - L1 string length
+	syscall 						# software interrupt
+									# user process requesting OS for service
+	movl $(SYS_exit), %eax 			# eax <-- 60 (exit) parameters to exit
+	movq $0, %rdi 					# rdi <-- 0
+	syscall 						# software interrupt
+	ret 							# return

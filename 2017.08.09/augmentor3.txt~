@@ -1,0 +1,48 @@
+assignment_operator: ASSIGN
+{ printf("assignment_operator  =>  =\n"); }
+| MULTEQ
+{ printf("assignment_operator  =>  *=\n"); }
+| DIVEQ
+{ printf("assignment_operator  =>  /=\n"); }
+| REMEQ
+{ printf("assignment_operator  =>  %=\n"); }
+| PLUSEQ
+{ printf("assignment_operator  =>  +=\n"); }
+| MINUSEQ
+{ printf("assignment_operator  =>  -=\n"); }
+| LSHEQ
+{ printf("assignment_operator  =>  <<=\n"); }
+| RSHEQ
+{ printf("assignment_operator  =>  >>=\n"); }
+| ANDEQ
+{ printf("assignment_operator  =>  &=\n"); }
+| XOREQ
+{ printf("assignment_operator  =>  ^=\n"); }
+| OREQ
+{ printf("assignment_operator  =>  |=\n"); }
+;
+
+212
+184
+
+157
+unary_operator: BITAND
+{ printf("unary_operator  =>  &\n"); }
+| MULT
+{ printf("unary_operator  =>  *\n"); }
+| PLUS
+{ printf("unary_operator  =>  +\n"); }
+;
+
+105
+constant: IC
+{ printf("constant  =>  INTEGER CONSTANT\n"); }
+| FC
+{ printf("constant  =>  FLOAT CONSTANT\n"); }
+| CC
+{ printf("constant  =>  CHARACTER CONSTANT\n"); }
+| ZC
+{ printf("constant  =>  ZERO CONSTANT\n"); }
+;
+
+

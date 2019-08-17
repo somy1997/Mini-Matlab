@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0044)http://www.linfo.org/system_call_number.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" type="text/css" href="./System Call Number Definition_files/belug1.css">
+
+<title>System Call Number Definition</title></head>
+
+<body bgcolor="#ffffff">
+
+<a href="http://www.linfo.org/index.html">LINFO</a>
+
+<br><center><h1>System Call Number Definition</h1></center><br>
+
+<table width="100%"><tbody><tr><td width="10%"></td><td width="80%">
+
+<br>
+
+<p>
+A <i>system call number</i> is a unique integer (i.e., whole number), from one to around 256, that is assigned to each <i>system call</i> in a <a href="http://www.linfo.org/unix-like.html">Unix-like</a> <a href="http://www.linfo.org/operating_systems_list.html">operating system</a>.
+</p>
+
+<p>
+A system call, sometimes called a <i>kernel call</i>, is a request by an <i>active <a href="http://www.linfo.org/process.html">process</a></i> for a service performed by the <a href="http://www.linfo.org/kernel.html"><i>kernel</i></a> (i.e., the core of the operating system), such as <i>input/output</i> (I/O) or <i>process creation</i> (i.e., creation of a new process). A process is an <i>executing</i> (i.e., running) instance of a program, and an active process is one that is currently progressing in the CPU (central processing unit), as contrasted with processes that are waiting for their next turns in the CPU. I/O is any movement of information to or from the combination of the CPU and <a href="http://www.linfo.org/memory.html">memory</a>. 
+</p>
+
+<p>
+A list of all registered system calls is maintained in the <i>system call table</i>, which assigns each a unique number. The numbers cannot be changed or recycled. Different operating systems and different versions of an operating system for use on different types of processors have different numbers.
+</p>
+
+<p>
+Processes do not refer to system calls by name, but rather by their system call number. That is, a system call number is an <a href="http://www.linfo.org/argument.html"><i>argument</i></a> (i.e., input information) that a process must pass to the kernel in order to identify the requested system call. Additional arguments are also usually passed at the same time.
+</p>
+
+<p>
+Programmers usually do not need to be concerned with system calls and system call numbers. This is because there are functions in <a href="http://www.linfo.org/glibc.html"><i>glibc</i></a>, the <a href="http://www.linfo.org/gnu.html">GNU</a> project's implementation of the Standard <a href="http://www.linfo.org/c.html">C</a> library, to do virtually everything that system calls do. A <i>library</i> is a collection of subprograms that any programmer can employ to reduce the amount of complex and repetitive code that has to be written for individual programs. The glibc functions work by making system calls themselves. For example, the <i>__NR_rename</i> system call, whose system call number is <i>38</i>, is used to rename files, but it is not necessary to know about it because the glibc's <i>rename</i> function can be used instead. 
+</p>
+
+<p>
+In the case of Red Hat Linux 9 for Intel-compatible processors, the system call numbers are listed in the file <i>/usr/include/asm/unistd.h</i>, and they can be viewed with a <a href="http://www.linfo.org/command.html">command</a> such as 
+</p>
+
+<blockquote>
+<p>
+<code>cat /usr/include/asm/unistd.h | less</code>
+</p>
+</blockquote>
+
+<p>
+<a href="http://www.linfo.org/cat.html"><i>cat</i></a> is commonly used to read the contents of text files. As the output can more than fill a single display screen, it is convenient to <a href="http://www.linfo.org/pipe.html"><i>pipe</i></a> (i.e., transfer) it to the <i>less</i> command to allow it to be read one screenful at a time. The list of system calls and their numbers begins as follows:
+</p>
+
+<pre>#define __NR_exit                 1
+#define __NR_fork                 2
+#define __NR_read                 3
+#define __NR_write                4
+#define __NR_open                 5
+#define __NR_close                6
+#define __NR_waitpid              7
+#define __NR_creat                8
+#define __NR_link                 9
+#define __NR_unlink              10
+#define __NR_execve              11
+#define __NR_chdir               12
+#define __NR_time                13
+#define __NR_mknod               14
+#define __NR_chmod               15
+#define __NR_lchown              16
+</pre>
+<br>
+<p>
+When a programmer writes a new system call, its name (which is always prefixed by <i>__NR_</i>) and a new system call number for it are added to this table. 
+</p>
+
+<p>
+In order for the kernel to associate each system call number with its corresponding service routine, the kernel makes use of a <i>system call dispatch table</i>, which is stored in the <i>sys_call_table</i> array.
+</p>
+
+<p>
+
+</p>
+
+<p>
+
+
+
+</p><p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+
+<p class="copy">Created June 21, 2005.<br>
+Copyright © 2005 The Linux Information Project. All Rights Reserved.</p>
+
+</td><td width="10%"></td></tr></tbody></table>
+
+
+</body></html>
